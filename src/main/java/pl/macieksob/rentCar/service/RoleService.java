@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.macieksob.rentCar.dto.RoleDTO;
+import pl.macieksob.rentCar.exception.RoleNotFoundException;
 import pl.macieksob.rentCar.model.Role;
 import pl.macieksob.rentCar.repository.RoleRepository;
 
@@ -48,15 +49,25 @@ public class RoleService {
         return roleRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public Role editRole(Long id, RoleDTO newRole){
-        Role role = roleRepository.getById(id);
+    public RoleDTO editRole(Long id, RoleDTO newRole){
+        Role role = roleRepository.findById(id).orElseThrow(() -> {throw new RoleNotFoundException("Role not exist!");
+        });
 
         role.setId(newRole.getId());
         role.setName(newRole.getName());
         role.setUsers(newRole.getUsers());
 
-        return roleRepository.save(role);
+        return mapToDTO(roleRepository.save(role));
     }
+
+    public RoleDTO getRole(Long id){
+        Role role = roleRepository.findById(id).orElseThrow(() -> {throw new RoleNotFoundException("Role not exist!");
+        });
+
+        return mapToDTO(role);
+    }
+
+
 
 
 }

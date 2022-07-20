@@ -1,9 +1,56 @@
 package pl.macieksob.rentCar.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import pl.macieksob.rentCar.dto.RoleDTO;
+import pl.macieksob.rentCar.service.RoleService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
 public class RoleController {
+
+    @Autowired
+    private RoleService roleService;
+
+    @PostMapping("/newRole")
+    public String addRole(RoleDTO role){
+        roleService.addRole(role);
+
+        return "";
+    }
+
+    @GetMapping
+    public List<RoleDTO> getAllRoles(){
+        return roleService.getRoles();
+    }
+
+    @PutMapping("/editRole/{id}")
+    public String editRole(@PathVariable Long id, @RequestBody RoleDTO newRole){
+        roleService.editRole(id, newRole);
+
+        return "";
+    }
+
+    @DeleteMapping("/deleteRole/{id}")
+    public String deleteRole(@PathVariable Long id){
+        roleService.deleteRoleById(id);
+
+        return "";
+    }
+
+    @DeleteMapping("/deleteRole")
+    public String deleteRole(@RequestBody RoleDTO role){
+        roleService.deleteRole(role);
+
+        return "";
+    }
+
+    @GetMapping("/{id}")
+    public String getRole(@PathVariable Long id){
+        roleService.getRole(id);
+
+        return "";
+    }
 }

@@ -46,7 +46,7 @@ public class CarController {
         return carService.getExclusiveCar();
     }
 
-    @PostMapping()
+    @PostMapping("/newCar")
     public Car saveCar(@RequestBody CarDTO car){
         return carService.addCar(car);
     }

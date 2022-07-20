@@ -7,7 +7,8 @@ import pl.macieksob.rentCar.service.MailService;
 import pl.macieksob.rentCar.service.CarService;
 
 @RestController
-public class Controller {
+public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
+
 
     @Autowired
     private MailService mailService;

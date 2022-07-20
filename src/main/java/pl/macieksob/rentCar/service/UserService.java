@@ -17,6 +17,7 @@ import pl.macieksob.rentCar.repository.UserRepository;
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +38,10 @@ public class UserService {
     private UserDTO mapToDTO(User user){
         UserDTO map = modelMapper.map(user, UserDTO.class);
         return map;
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
     }
 
     private User mapToEntity(UserDTO userDTO){
@@ -139,6 +144,14 @@ public class UserService {
         user.setResetPasswordToken(null);
 
         addUser(user);
+    }
+
+    public UserDTO getUser(Long id){
+        User user = userRepository.findById(id).orElseThrow(() -> {
+            throw new UserNotFoundException("User not found!");
+        });
+
+        return mapToDTO(user);
     }
 
 }

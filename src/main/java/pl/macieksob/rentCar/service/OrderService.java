@@ -73,4 +73,10 @@ public class OrderService {
         return orderRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
+    public OrderDTO getOrderById(Long id){
+        Order order = orderRepository.findById(id).orElseThrow(() -> {
+            throw new OrderNotFoundException("Order not exist!");
+        });
+        return mapToDTO(order);
+    }
 }
