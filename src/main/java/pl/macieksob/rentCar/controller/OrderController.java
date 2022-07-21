@@ -3,6 +3,7 @@ package pl.macieksob.rentCar.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.macieksob.rentCar.dto.OrderDTO;
+import pl.macieksob.rentCar.dto.UserDTO;
 import pl.macieksob.rentCar.model.Order;
 import pl.macieksob.rentCar.service.OrderService;
 
@@ -21,7 +22,18 @@ public class OrderController {
 
         return "";
     }
+    @DeleteMapping("/deleteOrder/{id}")
+    public String deleteUserById(@PathVariable Long id){
+        orderService.deleteOrderById(id);
+        return "";
+    }
 
+    @DeleteMapping("/deleteOrder")
+    public String deleteUser(OrderDTO order){
+        orderService.deleteOrder(order);
+
+        return "";
+    }
     @GetMapping
     public List<OrderDTO> getAllOrders(){
         return orderService.getAllOrders();
@@ -34,12 +46,25 @@ public class OrderController {
         return "";
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/editOrder/{id}")
     public String editOrder(@PathVariable Long id, @RequestBody OrderDTO newOrder){
         orderService.editOrder(id,newOrder);
 
         return "";
     }
 
+    @GetMapping("/place")
+    public List<OrderDTO> getAllOrdersByPlace(){
+        return orderService.getAllOrdersByPlace();
+    }
 
+    @GetMapping("/startDate")
+    public List<OrderDTO> getAllOrdersByStartDate(){
+        return orderService.getAllOrdersByStartDate();
+    }
+
+    @GetMapping("/endDate")
+    public List<OrderDTO> getAllOrdersByEndDate(){
+        return orderService.getAllOrdersByEndDate();
+    }
 }

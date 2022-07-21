@@ -22,68 +22,65 @@ import java.util.Collection;
 public class UserDTO {
     private Long id;
 
-    
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste!")
     private String name;
 
-    
-    @NotBlank
+
+    @NotBlank(message = "Pole nie może byc puste!")
     private String surname;
 
     @Email
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste!")
     private String email;
 
-    
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste!")
+    @Pattern(regexp = "\\d{2}-\\d{3}")
     private String postCode;
 
-    
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste!")
+    @Pattern(regexp = "[a-z]+([ -][A-Z][a-z]+)?")
     private String city;
 
-    
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste!")
+    @Pattern(regexp = "\\d{3} \\d{3} \\d{3}")
+    @Pattern(regexp = "\\d{9}")
     private String phoneNumber;
 
-    
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste!")
     private String street;
 
-    
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste!")
+    @Pattern(regexp = "\\\\d+[A-Z]?\\\\\\\\\\\\d+[A-Z]?")
     private String numberOfStreet;
 
+    @Min(1)
+    @NotNull(message = "Pole nie może byc puste")
+    private Integer numberOfFlat;
+
     @NotBlank(message = "Pole nie może byc puste!")
-    @Column(nullable = false)
+    @Size(min=6,message = "Pole musi mieć co najmniej 6 znaków!")
+    private String password;
+
+    @NotBlank(message = "Pole nie może byc puste!")
     @Size(min=11,max = 11,message = "Pole ma nieprawidłową ilość znaków")
     private String pesel;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(nullable = false, updatable = false)
     @NotNull(message = "Pole nie może byc puste")
     private LocalDateTime createdTime;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @Column(nullable = false, updatable = false)
     @NotBlank(message = "Pole nie może być puste!")
     private LocalDate dateOfBirth;
-    
-    @NotNull
-    private Integer numberOfFlat;
 
-    
-    @NotBlank
-    private String password;
-
-    @NotBlank
-    private String verificationCode;
-
-    private Boolean enabled;
-
-
+    @NotBlank(message = "Pole nie może byc puste!")
     private String resetPasswordToken;
 
+    @NotBlank(message = "Pole nie może byc puste!")
+    private String verificationCode;
+
+    //    @NotBlank(message = "Pole nie może byc puste!")
+    private Boolean enabled;
 
     @NotEmpty(message = "Pole nie może byc puste")
     private Collection<Role> roles;

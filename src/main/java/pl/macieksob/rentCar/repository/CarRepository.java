@@ -20,7 +20,7 @@ public interface CarRepository extends JpaRepository< Car, Long> {
     java.util.List<Car> findAllByBrand(String brand,Pageable pageable);
     java.util.List<Car> findAllByKm(Integer km,Pageable pageable);
 
-    List< Car> findAllByTransmission(String transmission,Pageable pageable);
+    List< Car> findAllByTransmission(Transmission transmission,Pageable pageable);
 
     List< Car> findAllByNm(Integer nm,Pageable pageable);
     List< Car> findAllByCategory(String category,Pageable pageable);

@@ -4,6 +4,7 @@ import net.bytebuddy.utility.RandomString;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,10 +41,60 @@ public class UserService {
         return map;
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
+    public List<UserDTO> getAllUsers(){
+        return userRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
+    public List<UserDTO> getAllUsersByUsername(){
+        return userRepository.findAllByEmail(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByUsernameDesc(){
+        return userRepository.findAllByEmail(PageRequest.of(0,10, Sort.by(Sort.Order.asc("email")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByUsernameAsc(){
+        return userRepository.findAllByEmail(PageRequest.of(0,10,Sort.by(Sort.Order.asc("email")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByPESEL(){
+        return userRepository.findAllByPesel(PageRequest.of(0,10,Sort.by(Sort.Order.asc("pesel")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+    public List<UserDTO> getAllUsersByName(){
+        return userRepository.findAllByName(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByNameDesc(){
+        return userRepository.findAllByName(PageRequest.of(0,10, Sort.by(Sort.Order.asc("name")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByNameAsc(){
+        return userRepository.findAllByName(PageRequest.of(0,10,Sort.by(Sort.Order.asc("name")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersBySurname(){
+        return userRepository.findAllBySurname(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersBySurnameDesc(){
+        return userRepository.findAllBySurname(PageRequest.of(0,10, Sort.by(Sort.Order.asc("surname")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersBySurnameAsc(){
+        return userRepository.findAllBySurname(PageRequest.of(0,10,Sort.by(Sort.Order.asc("surname")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByCity(){
+        return userRepository.findAllByCity(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByCityDesc(){
+        return userRepository.findAllByCity(PageRequest.of(0,10, Sort.by(Sort.Order.asc("city")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<UserDTO> getAllUsersByCityAsc(){
+        return userRepository.findAllByCity(PageRequest.of(0,10,Sort.by(Sort.Order.asc("city")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
     private User mapToEntity(UserDTO userDTO){
         User user = modelMapper.map(userDTO, User.class);
         return user;
@@ -109,7 +160,7 @@ public class UserService {
 //    }
 
     public boolean verify(String verificationCode){
-        UserDTO user = userRepository.findByVerificationCode(verificationCode);
+        User user = userRepository.findByVerificationCode(verificationCode);
 
         if(user == null || user.getEnabled()){
             return false;
@@ -133,7 +184,7 @@ public class UserService {
     }
 
     public UserDTO getUserByResetPasswordToken(String resetPasswordToken){
-        return userRepository.findByResetPasswordToken(resetPasswordToken);
+        return mapToDTO(userRepository.findByResetPasswordToken(resetPasswordToken));
     }
 
     public void updatePassword(UserDTO user, String newPassword){
@@ -153,5 +204,6 @@ public class UserService {
 
         return mapToDTO(user);
     }
+
 
 }

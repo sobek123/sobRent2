@@ -17,9 +17,8 @@ public class RoleDTO {
 
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Pole nie może być puste")
     private String name;
-
 
     @NotEmpty
     private Collection< User > users;

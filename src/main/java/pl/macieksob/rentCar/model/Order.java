@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +37,13 @@ public class Order {
     @NotNull(message = "Pole nie może byc puste")
     @Column(nullable = false)
     private LocalDate endDate;
+
+    @JsonProperty("start_date")
+    @NotNull(message = "Pole nie może byc puste")
+    @Column(nullable = false)
+    private LocalDateTime launchDate;
+
+
 
     @ManyToMany
     @JoinTable(

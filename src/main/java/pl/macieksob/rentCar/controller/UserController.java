@@ -27,11 +27,11 @@ public class UserController {
     private MailService mailService;
 
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public UserDTO getUser(@PathVariable Long id){
         return userService.getUser(id);
     }
@@ -70,7 +70,7 @@ public class UserController {
     public String verifyAccount(String code){
         boolean verify = userService.verify(code);
 
-        String pageTitle = verify ? "Weryfikacja przeszła pomyślnie!" : "Weryfikacja nieudana.";
+        String pageTitle = verify ? "Weryfikacja przebiegła pomyślnie!" : "Weryfikacja nieudana.";
         return "";
     }
 
@@ -116,6 +116,41 @@ public class UserController {
         }else {
             userService.updatePassword(user,password );
         }
+
+        return "";
+    }
+
+    @GetMapping("/city")
+    public String getUsersByCity(){
+        userService.getAllUsersByCity();
+
+        return "";
+    }
+
+    @GetMapping("/name")
+    public String getUsersByName(){
+        userService.getAllUsersByName();
+
+        return "";
+    }
+
+    @GetMapping("/surname")
+    public String getUsersBySurname(){
+        userService.getAllUsersBySurname();
+
+        return "";
+    }
+
+    @GetMapping("/email")
+    public String getUsersByEmail(){
+        userService.getAllUsersByUsername();
+
+        return "";
+    }
+
+    @GetMapping("/pesel")
+    public String getUsersByPesel(){
+        userService.getAllUsersByPESEL();
 
         return "";
     }

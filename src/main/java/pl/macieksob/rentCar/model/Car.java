@@ -26,45 +26,36 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     
     @NotBlank(message = "Pole nie może byc puste")
     private String model;
-
     
-    @NotBlank
+    @NotBlank(message = "Pole nie może byc puste")
     private String licensePlate;
-
     
     @NotEmpty(message = "Pole nie może byc puste")
     private BigDecimal prize;
-
     
     @NotNull(message = "Pole nie może byc puste")
     @Min(30)
     private Integer km;
-
     
     @NotNull(message = "Pole nie może byc puste")
     @Min(50)
     private Integer nm;
-
 
     @NotNull(message = "Pole nie może byc puste")
     @Min(5)
     @Max(50)
     private Double combustion;
 
-    
     @NotNull(message = "Pole nie może byc puste")
     @Min(1)
     @Max(10)
     private Double engine;
 
-    
     @NotBlank(message = "Pole nie może byc puste")
     private String image;
-
     
     @NotBlank(message = "Pole nie może byc puste")
     private String brand;
@@ -72,7 +63,6 @@ public class Car {
     @Enumerated(value = EnumType.STRING)
     @NotNull(message = "Pole nie może byc puste")
     private Transmission transmission;
-
     
     @NotBlank(message = "Pole nie może byc puste")
     private String details;

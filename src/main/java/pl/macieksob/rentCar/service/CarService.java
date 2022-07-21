@@ -7,10 +7,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.macieksob.rentCar.dto.CarDTO;
+import pl.macieksob.rentCar.dto.OrderDTO;
 import pl.macieksob.rentCar.exception.CarDuplicateException;
 import pl.macieksob.rentCar.exception.CarNotFoundException;
+import pl.macieksob.rentCar.exception.OrderNotFoundException;
 import pl.macieksob.rentCar.model.Car;
+import pl.macieksob.rentCar.model.Order;
 import pl.macieksob.rentCar.model.Petrol;
+import pl.macieksob.rentCar.model.Transmission;
 import pl.macieksob.rentCar.repository.CarRepository;
 
 import javax.persistence.EntityManager;
@@ -61,6 +65,13 @@ public class CarService {
         carRepository.delete(car);
     }
 
+    public CarDTO getCarById(Long id){
+        Car car = carRepository.findById(id).orElseThrow(() -> {
+            throw new CarNotFoundException("Car not exist!");
+        });
+        return mapToDTO(car);
+    }
+
     public Car editCar(Long id, CarDTO editCar){
         Car car = carRepository.findById(id).orElseThrow(() -> {
             throw new CarNotFoundException("Car not found!");
@@ -86,7 +97,9 @@ public class CarService {
     public java.util.List<CarDTO> getByModel(String model){
         return carRepository.findAllByModel(model, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
-
+    public java.util.List<CarDTO> getAllCars(){
+        return carRepository.findAll(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
     public java.util.List<CarDTO> getByBrand(String brand){
         return carRepository.findAllByBrand(brand, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
@@ -95,7 +108,7 @@ public class CarService {
         return carRepository.findAllByKm(km, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public java.util.List<CarDTO> getByTransmission(String transmission){
+    public java.util.List<CarDTO> getByTransmission(Transmission transmission){
         return carRepository.findAllByTransmission(transmission, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
@@ -119,6 +132,7 @@ public class CarService {
         return carRepository.findAllByPrize(prize, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
+    //SORTING
     public java.util.List<CarDTO> sortByPrizeAscending(){
         return carRepository.findAll(PageRequest.of(0,10,Sort.by(Sort.Order.asc("prize")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
@@ -179,6 +193,7 @@ public class CarService {
 //        return carRepository.findAllByKeyword(keyword, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
 //    }
 
+    //FILTERING
     public List<Car> getSportCar(){
         return carRepository.findAllByCategory("SPORT",PageRequest.of(0,3));
     }
@@ -202,4 +217,6 @@ public class CarService {
     public List<Car> getEconomyCar(){
         return carRepository.findAllByCategory("ECONOMY",PageRequest.of(0,3));
     }
+
+
 }

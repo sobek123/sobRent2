@@ -2,6 +2,8 @@ package pl.macieksob.rentCar.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.macieksob.rentCar.dto.OrderDTO;
 import pl.macieksob.rentCar.exception.OrderDuplicateException;
@@ -79,4 +81,34 @@ public class OrderService {
         });
         return mapToDTO(order);
     }
+    public List<OrderDTO> getAllOrdersByEndDate(){
+        return orderRepository.findAllByEndDate(PageRequest.of(0,10, Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByEndDateDesc(){
+        return orderRepository.findAllByEndDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByEndDateAsc(){
+        return orderRepository.findAllByEndDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+
+    public List<OrderDTO> getAllOrdersByStartDate(){
+        return orderRepository.findAllByStartDate(PageRequest.of(0,10, Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByStartDateDesc(){
+        return orderRepository.findAllByStartDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByStartDateAsc(){
+        return orderRepository.findAllByStartDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByPlace(){
+        return orderRepository.findAllByPlace(PageRequest.of(0,10, Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+
 }

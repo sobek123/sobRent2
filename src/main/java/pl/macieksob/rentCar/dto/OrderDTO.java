@@ -1,5 +1,6 @@
 package pl.macieksob.rentCar.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -7,12 +8,12 @@ import org.springframework.lang.NonNull;
 import pl.macieksob.rentCar.model.Car;
 import pl.macieksob.rentCar.model.User;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -21,16 +22,22 @@ public class OrderDTO {
 
     private Long id;
 
-    @NotNull
+    @JsonProperty("start_date")
+    @NotNull(message = "Pole nie może byc puste")
     private LocalDate startDate;
 
-    @NotNull
+    @JsonProperty("end_date")
+    @NotNull(message = "Pole nie może byc puste")
     private LocalDate endDate;
 
-   @NotEmpty
-    private Set< Car > cars;
+    @JsonProperty("start_date")
+    @NotNull(message = "Pole nie może byc puste")
+    private LocalDateTime launchDate;
 
-   @NotNull
+    @NotEmpty(message = "Pole nie może byc puste")
+    private Set<Car> cars;
+
+    @NotEmpty(message = "Pole nie może byc puste")
     private User user;
 
 
