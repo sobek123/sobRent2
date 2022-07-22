@@ -120,38 +120,26 @@ public class UserController {
         return "";
     }
 
-    @GetMapping("/city")
-    public String getUsersByCity(){
-        userService.getAllUsersByCity();
+    @GetMapping("/")
+    public String getUsersByCity(@RequestParam(value = "city") String city){
+        userService.getAllUsersByCity(city);
 
         return "";
     }
 
-    @GetMapping("/name")
-    public String getUsersByName(){
-        userService.getAllUsersByName();
+    @GetMapping("/")
+    public String getUsersByName(@RequestParam(value = "name") String name){
+        userService.getAllUsersByName(name);
 
         return "";
     }
 
-    @GetMapping("/surname")
-    public String getUsersBySurname(){
-        userService.getAllUsersBySurname();
+    @GetMapping("/")
+    public String getUsersBySurname(@RequestParam(value = "surname") String surname){
+        userService.getAllUsersBySurname(surname);
 
         return "";
     }
 
-    @GetMapping("/email")
-    public String getUsersByEmail(){
-        userService.getAllUsersByUsername();
 
-        return "";
-    }
-
-    @GetMapping("/pesel")
-    public String getUsersByPesel(){
-        userService.getAllUsersByPESEL();
-
-        return "";
-    }
 }

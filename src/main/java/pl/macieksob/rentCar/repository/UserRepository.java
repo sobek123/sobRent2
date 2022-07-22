@@ -34,9 +34,9 @@ public interface UserRepository extends JpaRepository< User,Long > {
 
     List<User> findAllByPesel(Pageable pageable);
 
-    List<User> findAllByName(PageRequest of);
+    List<User> findAllByName(String name,Pageable pageable);
 
-    List<User> findAllBySurname(PageRequest surname);
+    List<User> findAllBySurname(String surname,Pageable pageable);
 
-    List<User> findAllByCity(PageRequest city);
+    List<User> findAllByCity(String city,Pageable pageable);
 }

@@ -5,12 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import pl.macieksob.rentCar.dto.CarDTO;
 import pl.macieksob.rentCar.dto.OrderDTO;
 import pl.macieksob.rentCar.exception.OrderDuplicateException;
 import pl.macieksob.rentCar.exception.OrderNotFoundException;
 import pl.macieksob.rentCar.model.Order;
+import pl.macieksob.rentCar.model.Place;
 import pl.macieksob.rentCar.repository.OrderRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,34 +86,37 @@ public class OrderService {
         });
         return mapToDTO(order);
     }
-    public List<OrderDTO> getAllOrdersByEndDate(){
-        return orderRepository.findAllByEndDate(PageRequest.of(0,10, Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<OrderDTO> getAllOrdersByEndDate(LocalDate endDate){
+        return orderRepository.findAllByEndDate(endDate,PageRequest.of(0,10, Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<OrderDTO> getAllOrdersByEndDateDesc(){
-        return orderRepository.findAllByEndDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<OrderDTO> getAllOrdersByEndDateDesc(LocalDate endDate){
+        return orderRepository.findAllByEndDate(endDate,PageRequest.of(0,10,Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<OrderDTO> getAllOrdersByEndDateAsc(){
-        return orderRepository.findAllByEndDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-
-
-    public List<OrderDTO> getAllOrdersByStartDate(){
-        return orderRepository.findAllByStartDate(PageRequest.of(0,10, Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-
-    public List<OrderDTO> getAllOrdersByStartDateDesc(){
-        return orderRepository.findAllByStartDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-
-    public List<OrderDTO> getAllOrdersByStartDateAsc(){
-        return orderRepository.findAllByStartDate(PageRequest.of(0,10,Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-
-    public List<OrderDTO> getAllOrdersByPlace(){
-        return orderRepository.findAllByPlace(PageRequest.of(0,10, Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<OrderDTO> getAllOrdersByEndDateAsc(LocalDate endDate){
+        return orderRepository.findAllByEndDate(endDate,PageRequest.of(0,10,Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
 
+    public List<OrderDTO> getAllOrdersByStartDate(LocalDate startDate){
+        return orderRepository.findAllByStartDate(startDate,PageRequest.of(0,10, Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByStartDateDesc(LocalDate startDate){
+        return orderRepository.findAllByStartDate(startDate,PageRequest.of(0,10,Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByStartDateAsc(LocalDate startDate){
+        return orderRepository.findAllByStartDate(startDate,PageRequest.of(0,10,Sort.by(Sort.Order.asc("startDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<OrderDTO> getAllOrdersByPlace(Place place){
+        return orderRepository.findAllByPlace(place,PageRequest.of(0,10, Sort.by(Sort.Order.asc("endDate")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+//    @GetMapping("/")
+//    public List<OrderDTO> getCarsByTransmission(@RequestParam(value = "keyword") String keyword){
+//        return carService.getByKeyword();
+//    }
 }

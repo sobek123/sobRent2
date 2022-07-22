@@ -79,7 +79,7 @@ public class User implements UserDetails {
     private String password;
 
     @NotBlank(message = "Pole nie może byc puste!")
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     @Size(min=11,max = 11,message = "Pole ma nieprawidłową ilość znaków")
     private String pesel;
 

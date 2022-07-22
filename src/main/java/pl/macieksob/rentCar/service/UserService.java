@@ -8,6 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import pl.macieksob.rentCar.dto.CarDTO;
 import pl.macieksob.rentCar.dto.UserDTO;
 import pl.macieksob.rentCar.exception.UserDuplicateException;
 import pl.macieksob.rentCar.exception.UserNotFoundException;
@@ -45,55 +48,43 @@ public class UserService {
         return userRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersByUsername(){
-        return userRepository.findAllByEmail(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+
+
+
+    public List<UserDTO> getAllUsersByName(String name){
+        return userRepository.findAllByName(name,PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersByUsernameDesc(){
-        return userRepository.findAllByEmail(PageRequest.of(0,10, Sort.by(Sort.Order.asc("email")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersByNameDesc(String name){
+        return userRepository.findAllByName(name,PageRequest.of(0,10, Sort.by(Sort.Order.asc("name")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersByUsernameAsc(){
-        return userRepository.findAllByEmail(PageRequest.of(0,10,Sort.by(Sort.Order.asc("email")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersByNameAsc(String name){
+        return userRepository.findAllByName(name,PageRequest.of(0,10,Sort.by(Sort.Order.asc("name")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersByPESEL(){
-        return userRepository.findAllByPesel(PageRequest.of(0,10,Sort.by(Sort.Order.asc("pesel")))).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-    public List<UserDTO> getAllUsersByName(){
-        return userRepository.findAllByName(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersBySurname(String surname){
+        return userRepository.findAllBySurname(surname,PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersByNameDesc(){
-        return userRepository.findAllByName(PageRequest.of(0,10, Sort.by(Sort.Order.asc("name")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersBySurnameDesc(String surname){
+        return userRepository.findAllBySurname(surname,PageRequest.of(0,10, Sort.by(Sort.Order.asc("surname")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersByNameAsc(){
-        return userRepository.findAllByName(PageRequest.of(0,10,Sort.by(Sort.Order.asc("name")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersBySurnameAsc(String surname){
+        return userRepository.findAllBySurname(surname,PageRequest.of(0,10,Sort.by(Sort.Order.asc("surname")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersBySurname(){
-        return userRepository.findAllBySurname(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersByCity(String city){
+        return userRepository.findAllByCity(city,PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersBySurnameDesc(){
-        return userRepository.findAllBySurname(PageRequest.of(0,10, Sort.by(Sort.Order.asc("surname")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersByCityDesc(String city){
+        return userRepository.findAllByCity(city,PageRequest.of(0,10, Sort.by(Sort.Order.asc("city")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<UserDTO> getAllUsersBySurnameAsc(){
-        return userRepository.findAllBySurname(PageRequest.of(0,10,Sort.by(Sort.Order.asc("surname")))).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-
-    public List<UserDTO> getAllUsersByCity(){
-        return userRepository.findAllByCity(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-
-    public List<UserDTO> getAllUsersByCityDesc(){
-        return userRepository.findAllByCity(PageRequest.of(0,10, Sort.by(Sort.Order.asc("city")))).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
-
-    public List<UserDTO> getAllUsersByCityAsc(){
-        return userRepository.findAllByCity(PageRequest.of(0,10,Sort.by(Sort.Order.asc("city")))).stream().map(this::mapToDTO).collect(Collectors.toList());
+    public List<UserDTO> getAllUsersByCityAsc(String city){
+        return userRepository.findAllByCity(city,PageRequest.of(0,10,Sort.by(Sort.Order.asc("city")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
     private User mapToEntity(UserDTO userDTO){
         User user = modelMapper.map(userDTO, User.class);
@@ -205,5 +196,9 @@ public class UserService {
         return mapToDTO(user);
     }
 
+//    @GetMapping("/")
+//    public List<UserDTO> getCarsByTransmission(@RequestParam(value = "keyword") String keyword){
+//        return carService.getByKeyword();
+//    }
 
 }

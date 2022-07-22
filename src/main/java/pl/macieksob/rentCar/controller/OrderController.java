@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import pl.macieksob.rentCar.dto.OrderDTO;
 import pl.macieksob.rentCar.dto.UserDTO;
 import pl.macieksob.rentCar.model.Order;
+import pl.macieksob.rentCar.model.Place;
 import pl.macieksob.rentCar.service.OrderService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -53,18 +55,18 @@ public class OrderController {
         return "";
     }
 
-    @GetMapping("/place")
-    public List<OrderDTO> getAllOrdersByPlace(){
-        return orderService.getAllOrdersByPlace();
+    @GetMapping("/")
+    public List<OrderDTO> getAllOrdersByPlace(@RequestParam(value = "place")Place place){
+        return orderService.getAllOrdersByPlace(place);
     }
 
-    @GetMapping("/startDate")
-    public List<OrderDTO> getAllOrdersByStartDate(){
-        return orderService.getAllOrdersByStartDate();
+    @GetMapping("/")
+    public List<OrderDTO> getAllOrdersByStartDate(@RequestParam(value = "startDate")LocalDate startDate){
+        return orderService.getAllOrdersByStartDate(startDate);
     }
 
-    @GetMapping("/endDate")
-    public List<OrderDTO> getAllOrdersByEndDate(){
-        return orderService.getAllOrdersByEndDate();
+    @GetMapping("/")
+    public List<OrderDTO> getAllOrdersByEndDate(@RequestParam(value = "endDate")LocalDate endDate){
+        return orderService.getAllOrdersByEndDate(endDate);
     }
 }

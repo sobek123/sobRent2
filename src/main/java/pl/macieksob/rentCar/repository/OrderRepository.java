@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import pl.macieksob.rentCar.dto.OrderDTO;
 import pl.macieksob.rentCar.dto.UserDTO;
 import pl.macieksob.rentCar.model.Order;
+import pl.macieksob.rentCar.model.Place;
 import pl.macieksob.rentCar.model.User;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,9 +21,9 @@ public interface OrderRepository extends JpaRepository< Order,Long > {
     @Query(nativeQuery = true,value = "select * from ORDERS O inner join CATEGORY C on C.ID = i.CATEGORY_ID where i.TITLE iLIKE  %:keyword%  or i.CONTENT iLIKE  %:keyword% or c.name iLIKE  %:keyword% or i.date iLIKE  %:keyword%")
     List<Order> findAllByKeyword(String keyword);
 
-    List<Order> findAllByEndDate(Pageable pageable);
+    List<Order> findAllByEndDate(LocalDate endDate,Pageable pageable);
 
-    List<Order> findAllByStartDate(PageRequest endDate);
+    List<Order> findAllByStartDate(LocalDate startDate,Pageable pageable);
 
-    List<Order> findAllByPlace(PageRequest endDate);
+    List<Order> findAllByPlace(Place place,Pageable pageable);
 }

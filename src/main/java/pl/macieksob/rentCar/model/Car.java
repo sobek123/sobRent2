@@ -81,7 +81,7 @@ public class Car {
     private Integer year;
 
     @NotNull(message = "Pole nie może byc puste")
-    private Boolean taken;
+    private Boolean taken = false;
 
     @Min(200)
     @NotNull(message = "Pole nie może byc puste")

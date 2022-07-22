@@ -86,43 +86,48 @@ public class CarController {
         return "";
     }
 
-    @GetMapping("/brand")
-    public List<CarDTO> getCarsByBrand(String brand){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByBrand(@RequestParam(value = "brand") String brand){
         return carService.getByBrand(brand);
     }
 
-    @GetMapping("/engine")
-    public List<CarDTO> getCarsByBrand(Double engine){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByEngine(@RequestParam(value = "engine") Double engine){
         return carService.getByEngine(engine);
     }
 
-    @GetMapping("/km")
-    public List<CarDTO> getCarsByKm(Integer km){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByKm(@RequestParam(value = "km") Integer km){
         return carService.getByKm(km);
     }
 
-    @GetMapping("/model")
-    public List<CarDTO> getCarsByModel(String model){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByModel(@RequestParam(value = "model") String model){
         return carService.getByModel(model);
     }
 
-    @GetMapping("/petrol")
-    public List<CarDTO> getCarsByPetrol(Petrol petrol){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByPetrol(@RequestParam(value = "petrol") Petrol petrol){
         return carService.getByPetrol(petrol);
     }
 
-    @GetMapping("/year")
-    public List<CarDTO> getCarsByBrand(Integer year){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByYear(@RequestParam(value = "year") Integer year){
         return carService.getByYear(year);
     }
 
-    @GetMapping("/prize")
-    public List<CarDTO> getCarsByPrize(BigDecimal prize){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByPrize(@RequestParam(value = "prize") BigDecimal prize){
         return carService.getByPrize(prize);
     }
 
-    @GetMapping("/transmission")
-    public List<CarDTO> getCarsByTransmission(Transmission transmission){
+    @GetMapping("/")
+    public List<CarDTO> getCarsByTransmission(@RequestParam(value = "transmission") Transmission transmission){
         return carService.getByTransmission(transmission);
     }
+
+//    @GetMapping("/")
+//    public List<CarDTO> getCarsByTransmission(@RequestParam(value = "keyword") String keyword){
+//        return carService.getByKeyword();
+//    }
 }
