@@ -9,13 +9,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
+@CrossOrigin("http://localhost:3000")
 public class RoleController {
 
     @Autowired
     private RoleService roleService;
 
     @PostMapping("/newRole")
-    public String addRole(RoleDTO role){
+    public String addRole(@RequestBody RoleDTO role){
         roleService.addRole(role);
 
         return "";

@@ -13,13 +13,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
+@CrossOrigin("http://localhost:3000")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
     @PostMapping("/newOrder")
-    public String addOrder(OrderDTO orderDTO){
+    public String addOrder(@RequestBody OrderDTO orderDTO){
         orderService.addOrder(orderDTO);
 
         return "";

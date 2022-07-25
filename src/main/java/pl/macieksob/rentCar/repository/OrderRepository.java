@@ -26,4 +26,6 @@ public interface OrderRepository extends JpaRepository< Order,Long > {
     List<Order> findAllByStartDate(LocalDate startDate,Pageable pageable);
 
     List<Order> findAllByPlace(Place place,Pageable pageable);
+
+
 }

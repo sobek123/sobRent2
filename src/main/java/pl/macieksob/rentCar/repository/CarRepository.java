@@ -25,6 +25,9 @@ public interface CarRepository extends JpaRepository< Car, Long> {
     List< Car> findAllByNm(Integer nm,Pageable pageable);
     List< Car> findAllByCategory(String category,Pageable pageable);
 
+    @Query(nativeQuery = true, value = "gdgf")
+    List< Car> findAllByStartDateAndEndDateAndPLace(String category,Pageable pageable);
+
     List< Car> findAllByPrize(BigDecimal prize,Pageable pageable);
 //    List< Car> findAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(BigDecimal prize, String model, String brand, Integer km, Transmission transmission, Integer year,Petrol petrol,String engine,Pageable pageable);
 //    List< Car> findAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrol(BigDecimal prize, String model, String brand, Integer km, Transmission transmission, Integer year,Petrol petrol,Pageable pageable);

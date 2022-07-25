@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/cars")
 public class CarController {
 
@@ -80,7 +81,7 @@ public class CarController {
     }
 
     @DeleteMapping("/deleteCar")
-    public String deleteUser(CarDTO user){
+    public String deleteCar(CarDTO user){
         carService.deleteCar(user);
 
         return "";
