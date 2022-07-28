@@ -1,2 +1,0 @@
-INSERT INTO CARS VALUES (1,'BMW','ECONOMY', 7, 200, 'fsdfds', 2.0, 'htrwtwer',200, 'WU1239', 'M3',260, 'DIESEL', 250,false, 'MANUAL', 2019)
-INSERT INTO CARS VALUES (2,'Mercedes','ECONOMY', 9, 200, 'fsdfds', 2.5, 'htrwtwer',300, 'WU1249', 'E200',450, 'DIESEL', 250,false, 'MANUAL', 2019)

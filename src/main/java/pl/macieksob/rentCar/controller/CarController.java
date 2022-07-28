@@ -57,6 +57,8 @@ public class CarController {
 
 
     @GetMapping("/all")
+    @CrossOrigin("http://localhost:3000")
+
     public List<CarDTO> getAllCars(){
         return carService.getAllCars();
     }
