@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.macieksob.rentCar.dto.RoleDTO;
 import pl.macieksob.rentCar.service.RoleService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping("/newRole")
-    public String addRole(@RequestBody RoleDTO role){
+    public String addRole(@RequestBody @Valid RoleDTO role){
         roleService.addRole(role);
 
         return "";

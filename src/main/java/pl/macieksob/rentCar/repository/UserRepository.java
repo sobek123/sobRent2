@@ -28,15 +28,17 @@ public interface UserRepository extends JpaRepository< User,Long > {
     @Query("UPDATE User U SET U.enabled = TRUE WHERE U.id = ?1")
     void setEnable(Long id);
 
-    UserDTO findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
-    List<User> findAllByEmail(Pageable pageable);
+    List<User> findAllByEmail(String email,Pageable pageable);
 
-    List<User> findAllByPesel(Pageable pageable);
+    List<User> findAllByPesel(String pesel,Pageable pageable);
 
     List<User> findAllByName(String name,Pageable pageable);
 
     List<User> findAllBySurname(String surname,Pageable pageable);
 
     List<User> findAllByCity(String city,Pageable pageable);
+
+    boolean existsByEmail(String email);
 }

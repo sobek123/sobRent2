@@ -9,38 +9,49 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.macieksob.rentCar.service.CustomUserDetailsService;
 //import pl.macieksob.rentCar.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class Security extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private CustomUserDetailsService customUserDetailsService;
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Autowired
+    private AuthEntryPointJWT unauthorizedhandler;
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter(){
+        return new AuthTokenFilter();
+    }
 
 //    @Autowired
 //    private JWTTokenFilter jwtTokenFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .anyRequest().authenticated()
-////                .and().addFilter(new CustomAuthenticationFilter(authenticationManagerBean())).
-////                addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class).
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedhandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated().and().rememberMe().key("afdfgdgdfg").tokenValiditySeconds(86400);
 //                .and().formLogin().permitAll()
 //                .and().logout().permitAll()
-//                .and().rememberMe().key("afdfgdgdfg").tokenValiditySeconds(86400);
 
-//        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+
+       http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(customUserDetailsService).passwordEncoder(getPasswordEncoder());
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailsService).passwordEncoder(getPasswordEncoder());
+    }
 
     @Bean
     public PasswordEncoder getPasswordEncoder(){

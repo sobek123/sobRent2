@@ -6,18 +6,14 @@ import javax.persistence.Embedded;
 
 public enum Category {
 
-    COMFORT("Comfort"),
-    SPORT("Sport"),
-    ECONOMY("Ekonomiczne"),
-    EXCLUSIVE("Ekskluzywne"),
-    RETRO("Retro"),
-    CARGO("Dostawcze");
+    COMFORT,
+    SPORT,
+    ECONOMY,
+    EXCLUSIVE,
+    SUV,
+    CARGO;
 
-    private String detail;
 
-    Category(String detail) {
-        this.detail = detail;
-    }
 
     Category(){}
 

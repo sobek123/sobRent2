@@ -38,16 +38,18 @@ public class OrderService {
         return order;
     }
 
-    public Order addOrder(OrderDTO order){
+    public OrderDTO addOrder(OrderDTO order){
         if(orderRepository.existsById(order.getId())){
             throw new OrderDuplicateException("Order already exists!");
         }
 
         Order order1 = mapToEntity(order);
-        return orderRepository.save(order1);
+        orderRepository.save(order1);
+
+        return order;
     }
 
-    public Order editOrder(Long id, OrderDTO editOrder){
+    public OrderDTO editOrder(Long id, OrderDTO editOrder){
         Order order = orderRepository.findById(id).orElseThrow(() -> {throw new OrderNotFoundException("Order not exist!");
         });
 
@@ -56,10 +58,12 @@ public class OrderService {
         order.setEndDate(editOrder.getEndDate());
         order.setCars(editOrder.getCars());
 
-        return orderRepository.save(order);
+        orderRepository.save(order);
+
+        return mapToDTO(order);
     }
 
-    public void deleteOrderById(Long id){
+    public void deleteOrderById(Long id) throws OrderNotFoundException{
         Order order = orderRepository.findById(id).orElseThrow(() -> {throw new OrderNotFoundException("Order not exist!");
         });
 

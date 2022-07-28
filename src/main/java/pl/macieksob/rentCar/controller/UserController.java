@@ -11,6 +11,7 @@ import pl.macieksob.rentCar.service.UserService;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,34 +39,32 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(UserDTO user, HttpServletRequest httpServletRequest) throws MessagingException, UnsupportedEncodingException {
+    public UserDTO registerUser(@RequestBody @Valid UserDTO user, HttpServletRequest httpServletRequest) throws MessagingException, UnsupportedEncodingException {
 
         String url = Utility.getURL(httpServletRequest);
         userService.sendVerificationEmail(user,url);
         user.setCreatedTime(LocalDateTime.now());
-        user.setRoles(Set.of(new Role("LOGGED_USER")));
-        userService.addUser(user);
-        return "";
+//        user.setRoles(Set.of(new Role("LOGGED_USER")));
+        return userService.addUser(user);
+
     }
 
     @PutMapping("/editUser/{id}")
-    public String editUser(@PathVariable Long id, @RequestBody UserDTO newUser){
-        userService.editUser(id,newUser);
+    public UserDTO editUser(@PathVariable Long id, @Valid @RequestBody UserDTO newUser){
+        return userService.editUser(id,newUser);
 
-        return "";
+
     }
 
     @DeleteMapping("/deleteUser/{id}")
-    public String deleteUserById(@PathVariable Long id){
+    public void deleteUserById(@PathVariable Long id){
         userService.deleteUserById(id);
-        return "";
     }
 
     @DeleteMapping("/deleteUser")
-    public String deleteUser(UserDTO user){
+    public void deleteUser(UserDTO user){
         userService.deleteUser(user);
 
-        return "";
     }
     @GetMapping("/verify")
     public String verifyAccount(String code){
@@ -121,25 +120,25 @@ public class UserController {
         return "";
     }
 
-    @GetMapping("/")
-    public String getUsersByCity(@RequestParam(value = "city") String city){
-        userService.getAllUsersByCity(city);
+    @GetMapping("/city")
+    public List<UserDTO> getUsersByCity(@RequestParam(value = "city") String city){
+        return userService.getAllUsersByCity(city);
 
-        return "";
+
     }
 
-    @GetMapping("/")
-    public String getUsersByName(@RequestParam(value = "name") String name){
-        userService.getAllUsersByName(name);
+    @GetMapping("/name")
+    public List<UserDTO> getUsersByName(@RequestParam(value = "name") String name){
+        return userService.getAllUsersByName(name);
 
-        return "";
+
     }
 
-    @GetMapping("/")
-    public String getUsersBySurname(@RequestParam(value = "surname") String surname){
-        userService.getAllUsersBySurname(surname);
+    @GetMapping("/surname")
+    public List<UserDTO> getUsersBySurname(@RequestParam(value = "surname") String surname){
+        return userService.getAllUsersBySurname(surname);
 
-        return "";
+
     }
 
 

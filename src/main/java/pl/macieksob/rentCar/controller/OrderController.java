@@ -8,6 +8,7 @@ import pl.macieksob.rentCar.model.Order;
 import pl.macieksob.rentCar.model.Place;
 import pl.macieksob.rentCar.service.OrderService;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,22 +21,19 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/newOrder")
-    public String addOrder(@RequestBody OrderDTO orderDTO){
-        orderService.addOrder(orderDTO);
+    public OrderDTO addOrder(@Valid @RequestBody OrderDTO orderDTO){
+        return orderService.addOrder(orderDTO);
 
-        return "";
     }
     @DeleteMapping("/deleteOrder/{id}")
-    public String deleteUserById(@PathVariable Long id){
+    public void deleteUserById(@PathVariable Long id){
         orderService.deleteOrderById(id);
-        return "";
+
     }
 
     @DeleteMapping("/deleteOrder")
-    public String deleteUser(OrderDTO order){
+    public void deleteUser(OrderDTO order){
         orderService.deleteOrder(order);
-
-        return "";
     }
     @GetMapping
     public List<OrderDTO> getAllOrders(){
@@ -43,30 +41,28 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public String getOrder(@PathVariable Long id){
-        orderService.getOrderById(id);
+    public OrderDTO getOrder(@PathVariable Long id){
+        return orderService.getOrderById(id);
 
-        return "";
     }
 
     @PutMapping("/editOrder/{id}")
-    public String editOrder(@PathVariable Long id, @RequestBody OrderDTO newOrder){
-        orderService.editOrder(id,newOrder);
+    public OrderDTO editOrder(@PathVariable Long id,@Valid @RequestBody OrderDTO newOrder){
+        return orderService.editOrder(id,newOrder);
 
-        return "";
     }
 
-    @GetMapping("/")
+    @GetMapping("/place")
     public List<OrderDTO> getAllOrdersByPlace(@RequestParam(value = "place")Place place){
         return orderService.getAllOrdersByPlace(place);
     }
 
-    @GetMapping("/")
+    @GetMapping("/startDate")
     public List<OrderDTO> getAllOrdersByStartDate(@RequestParam(value = "startDate")LocalDate startDate){
         return orderService.getAllOrdersByStartDate(startDate);
     }
 
-    @GetMapping("/")
+    @GetMapping("/endDate")
     public List<OrderDTO> getAllOrdersByEndDate(@RequestParam(value = "endDate")LocalDate endDate){
         return orderService.getAllOrdersByEndDate(endDate);
     }

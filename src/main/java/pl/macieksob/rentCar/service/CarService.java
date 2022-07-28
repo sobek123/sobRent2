@@ -7,23 +7,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.macieksob.rentCar.dto.CarDTO;
-import pl.macieksob.rentCar.dto.OrderDTO;
 import pl.macieksob.rentCar.exception.CarDuplicateException;
 import pl.macieksob.rentCar.exception.CarNotFoundException;
-import pl.macieksob.rentCar.exception.OrderNotFoundException;
 import pl.macieksob.rentCar.model.Car;
-import pl.macieksob.rentCar.model.Order;
 import pl.macieksob.rentCar.model.Petrol;
 import pl.macieksob.rentCar.model.Transmission;
 import pl.macieksob.rentCar.repository.CarRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,16 +38,18 @@ public class CarService {
     }
 
     @Transactional
-    public Car addCar(CarDTO car){
+    public CarDTO addCar(CarDTO car){
         if(carRepository.existsById(car.getId())){
             throw new CarDuplicateException("Car already exists!");
         }
 
         Car car1 = mapToEntity(car);
-        return carRepository.save(car1);
+        carRepository.save(car1);
+
+        return car;
     }
 
-    public void deleteCar(Long id){
+    public void deleteCar(Long id) throws CarNotFoundException{
         Car car = carRepository.findById(id).orElseThrow(() -> {
             throw new CarNotFoundException("Car not found!");
         });
@@ -65,14 +57,14 @@ public class CarService {
         carRepository.delete(car);
     }
 
-    public CarDTO getCarById(Long id){
+    public CarDTO getCarById(Long id) throws CarNotFoundException {
         Car car = carRepository.findById(id).orElseThrow(() -> {
             throw new CarNotFoundException("Car not exist!");
         });
         return mapToDTO(car);
     }
 
-    public Car editCar(Long id, CarDTO editCar){
+    public CarDTO editCar(Long id, CarDTO editCar) throws CarNotFoundException{
         Car car = carRepository.findById(id).orElseThrow(() -> {
             throw new CarNotFoundException("Car not found!");
         });
@@ -82,7 +74,9 @@ public class CarService {
         car.setDetails(editCar.getDetails());
         car.setImage(editCar.getImage());
 
-        return carRepository.save(car);
+        carRepository.save(car);
+
+        return mapToDTO(car);
     }
 
     public void deleteCar(CarDTO car){
@@ -112,9 +106,6 @@ public class CarService {
         return carRepository.findAllByTransmission(transmission, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public java.util.List<CarDTO> getByNm(Integer nm){
-        return carRepository.findAllByNm(nm, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
 
     public java.util.List<CarDTO> getByPetrol(Petrol petrol){
         return carRepository.findAllByPetrol(petrol, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
@@ -194,28 +185,33 @@ public class CarService {
 //    }
 
     //FILTERING
-    public List<Car> getSportCar(){
-        return carRepository.findAllByCategory("SPORT",PageRequest.of(0,3));
+    public List<CarDTO> getSportCar(){
+        return carRepository.findAllByCategory("SPORT",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<Car> getExclusiveCar(){
-        return carRepository.findAllByCategory("EXCLUSIVE",PageRequest.of(0,3));
+    public List<CarDTO> getExclusiveCar(){
+        return carRepository.findAllByCategory("EXCLUSIVE",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<Car> getComfortCar(){
-        return carRepository.findAllByCategory("COMFORT",PageRequest.of(0,3));
+    public List<CarDTO> getComfortCar(){
+        return carRepository.findAllByCategory("COMFORT",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<Car> getCargoCar(){
-        return carRepository.findAllByCategory("CARGO",PageRequest.of(0,3));
+    public List<CarDTO> getCargoCar(){
+        return carRepository.findAllByCategory("CARGO",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<Car> getRetroCar(){
-        return carRepository.findAllByCategory("RETRO",PageRequest.of(0,3));
+    public List<CarDTO> getSUVCar(){
+        return carRepository.findAllByCategory("SUV",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public List<Car> getEconomyCar(){
-        return carRepository.findAllByCategory("ECONOMY",PageRequest.of(0,3));
+    public List<CarDTO> getEconomyCar(){
+        return carRepository.findAllByCategory("ECONOMY",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    public List<CarDTO> getAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(String brand, String model, BigDecimal prize, Integer km, Petrol petrol, Integer year, Double engine, Transmission tr){
+
+        return carRepository.findAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(prize,model,brand,km,tr,year,petrol,engine,PageRequest.of(0,5)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
 

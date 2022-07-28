@@ -43,7 +43,9 @@ public class Order {
     @Column(nullable = false)
     private LocalDateTime launchDate;
 
-
+    @NotNull(message = "Pole nie może byc puste")
+    @Column(nullable = false)
+    private Place place;
 
     @ManyToMany
     @JoinTable(

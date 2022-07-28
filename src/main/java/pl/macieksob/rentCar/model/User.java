@@ -154,4 +154,9 @@ public class User implements UserDetails {
     public void addRole(Role role){
         roles.add(role);
     }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

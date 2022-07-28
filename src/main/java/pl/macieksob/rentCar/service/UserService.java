@@ -48,9 +48,6 @@ public class UserService {
         return userRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-
-
-
     public List<UserDTO> getAllUsersByName(String name){
         return userRepository.findAllByName(name,PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
@@ -91,7 +88,7 @@ public class UserService {
         return user;
     }
 
-    public User addUser(UserDTO user)  {
+    public UserDTO addUser(UserDTO user)  {
         if(userRepository.existsById(user.getId())){
             throw new UserDuplicateException("User already exists!");
         }
@@ -99,13 +96,22 @@ public class UserService {
         user1.setPassword(passwordEncoder.encode(user.getPassword()));
 
 
-        return userRepository.save(user1);
+         userRepository.save(user1);
+         return user;
     }
 
+    public String manOrWoman(UserDTO user){
+        if(user.getName().endsWith("a")){
+            return "Szanowna Pani ";
+        }
+        else {
+            return "Szanowny Panie ";
+        }
+    }
     public void sendVerificationEmail(UserDTO user, String url) throws MessagingException, UnsupportedEncodingException {
         String subject  = "Potwierdzenie rejestracji";
         String from = "RentCar";
-        String message = "<p>Szanowny " + user.getName() + " " + user.getSurname() + ",</p>";
+        String message = "<p>" + manOrWoman(user) + user.getName() + " " + user.getSurname() + ",</p>";
         message += "<p>Aby korzystać z konta musisz potwierdzić rejestrację. Zrobisz to klikając w poniższy link.</p>";
         String verifyURL = url + "/verify?code=" + user.getVerificationCode();
         message += "<h4><a href=\""+verifyURL+"\">WERYFIKACJA</a></h4>";
@@ -123,7 +129,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User editUser(Long id, UserDTO editUser){
+    public UserDTO editUser(Long id, UserDTO editUser){
         User user = userRepository.findById(id).orElseThrow(() -> {
             throw new UserNotFoundException("User not found!");
         });
@@ -137,7 +143,8 @@ public class UserService {
         user.setCreatedTime(LocalDateTime.now());
         String make = RandomString.make(64);
         user.setVerificationCode(make);
-        return userRepository.save(user);
+         userRepository.save(user);
+         return mapToDTO(user);
     }
 
     public void deleteUser(UserDTO user){
@@ -164,11 +171,11 @@ public class UserService {
     }
 
     public void updateResetPasswordToken(String token, String email) throws UserNotFoundException{
-        UserDTO user = userRepository.findByEmail(email);
-
+        User user = userRepository.findByEmail(email).orElseThrow(() -> {throw new UserNotFoundException("User not found!");});
+        UserDTO userDTO = mapToDTO(user);
         if(user != null){
             user.setResetPasswordToken(token);
-            addUser(user);
+            addUser(userDTO);
         }else{
             throw new UserNotFoundException("User not found!");
         }
@@ -195,10 +202,5 @@ public class UserService {
 
         return mapToDTO(user);
     }
-
-//    @GetMapping("/")
-//    public List<UserDTO> getCarsByTransmission(@RequestParam(value = "keyword") String keyword){
-//        return carService.getByKeyword();
-//    }
 
 }

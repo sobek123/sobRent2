@@ -30,10 +30,12 @@ public class RoleService {
         return role;
     }
 
-    public Role addRole(RoleDTO role){
+    public RoleDTO addRole(RoleDTO role){
         Role role1 = mapToEntity(role);
 
-        return roleRepository.save(role1);
+        roleRepository.save(role1);
+
+        return role;
     }
 
     public void deleteRoleById(Long id){
