@@ -104,6 +104,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Boolean enabled;
 
+    @Column(nullable = false)
+    @NotNull(message = "Pole nie może być puste!")
+    private Integer points;
     @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @NotEmpty(message = "Pole nie może byc puste")
     @JoinTable(

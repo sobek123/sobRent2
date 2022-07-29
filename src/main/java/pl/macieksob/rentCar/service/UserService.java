@@ -22,6 +22,7 @@ import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,8 +41,7 @@ public class UserService {
     private MailService mailService;
 
     private UserDTO mapToDTO(User user){
-        UserDTO map = modelMapper.map(user, UserDTO.class);
-        return map;
+        return modelMapper.map(user, UserDTO.class);
     }
 
     public List<UserDTO> getAllUsers(){
@@ -84,8 +84,7 @@ public class UserService {
         return userRepository.findAllByCity(city,PageRequest.of(0,10,Sort.by(Sort.Order.asc("city")))).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
     private User mapToEntity(UserDTO userDTO){
-        User user = modelMapper.map(userDTO, User.class);
-        return user;
+        return modelMapper.map(userDTO, User.class);
     }
 
     public UserDTO addUser(UserDTO user)  {
@@ -201,6 +200,11 @@ public class UserService {
         });
 
         return mapToDTO(user);
+    }
+
+    public UserDTO findByPassword(String password){
+        User byPassword = userRepository.findByPassword(password).orElseThrow(() -> {throw new UserNotFoundException("User not found!");});
+        return mapToDTO(byPassword);
     }
 
 }

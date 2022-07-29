@@ -85,4 +85,7 @@ public class CarDTO {
     @ManyToMany(mappedBy = "cars")
     @NotEmpty(message = "Pole nie może byc puste")
     private Set<Order> orders;
+
+    @NotNull(message = "Pole nie może być puste!")
+    private Integer points;
 }

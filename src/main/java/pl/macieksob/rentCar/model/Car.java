@@ -83,6 +83,10 @@ public class Car {
     @NotNull(message = "Pole nie może byc puste")
     private Boolean taken = false;
 
+    @NotNull(message = "Pole nie może być puste")
+    @Min(100)
+    private Integer points;
+
     @Min(200)
     @NotNull(message = "Pole nie może byc puste")
     private Integer deposit;

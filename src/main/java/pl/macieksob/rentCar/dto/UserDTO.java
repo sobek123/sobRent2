@@ -85,4 +85,6 @@ public class UserDTO {
     @NotEmpty(message = "Pole nie może byc puste")
     private Collection<Role> roles;
 
+    @NotNull(message = "Pole nie może być puste!")
+    private Integer points;
 }

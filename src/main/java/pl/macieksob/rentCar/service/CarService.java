@@ -4,15 +4,19 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.macieksob.rentCar.dto.CarDTO;
+import pl.macieksob.rentCar.dto.UserDTO;
 import pl.macieksob.rentCar.exception.CarDuplicateException;
 import pl.macieksob.rentCar.exception.CarNotFoundException;
 import pl.macieksob.rentCar.model.Car;
 import pl.macieksob.rentCar.model.Petrol;
 import pl.macieksob.rentCar.model.Transmission;
 import pl.macieksob.rentCar.repository.CarRepository;
+import pl.macieksob.rentCar.repository.UserRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,16 +29,17 @@ public class CarService {
     private CarRepository carRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     private CarDTO mapToDTO(Car car){
-        CarDTO map = modelMapper.map(car, CarDTO.class);
-        return map;
+        return modelMapper.map(car, CarDTO.class);
     }
 
     private Car mapToEntity(CarDTO carDTO){
-        Car car = modelMapper.map(carDTO, Car.class);
-        return car;
+        return modelMapper.map(carDTO, Car.class);
     }
 
     @Transactional
@@ -214,5 +219,16 @@ public class CarService {
         return carRepository.findAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(prize,model,brand,km,tr,year,petrol,engine,PageRequest.of(0,5)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
+    public void rentCar(Long id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String credentials = (String) auth.getCredentials();
+        UserDTO byPassword = userService.findByPassword(credentials);
+
+        CarDTO carById = getCarById(id);
+        carById.setTaken(true);
+        Car car = mapToEntity(carById);
+        byPassword.setPoints(byPassword.getPoints() + car.getPoints());
+        carRepository.save(car);
+    }
 
 }
