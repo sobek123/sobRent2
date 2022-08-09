@@ -35,17 +35,17 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedhandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated().and().rememberMe().key("afdfgdgdfg").tokenValiditySeconds(86400);
-//                .and().formLogin().permitAll()
-//                .and().logout().permitAll()
-
-
-
-       http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.cors().and().csrf().disable()
+//                .exceptionHandling().authenticationEntryPoint(unauthorizedhandler).and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                .authorizeRequests().antMatchers("/auth/**").permitAll()
+//                .anyRequest().authenticated().and().rememberMe().key("afdfgdgdfg").tokenValiditySeconds(86400);
+////                .and().formLogin().permitAll()
+////                .and().logout().permitAll()
+//
+//
+//
+//       http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

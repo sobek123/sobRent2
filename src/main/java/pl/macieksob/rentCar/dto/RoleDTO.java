@@ -1,8 +1,6 @@
 package pl.macieksob.rentCar.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import pl.macieksob.rentCar.model.User;
 
 import javax.persistence.ManyToMany;
@@ -12,7 +10,9 @@ import java.util.Collection;
 
 @Data
 @NoArgsConstructor
-
+@AllArgsConstructor
+@Getter
+@Setter
 public class RoleDTO {
 
     private Long id;

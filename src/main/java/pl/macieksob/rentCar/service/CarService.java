@@ -13,6 +13,7 @@ import pl.macieksob.rentCar.dto.UserDTO;
 import pl.macieksob.rentCar.exception.CarDuplicateException;
 import pl.macieksob.rentCar.exception.CarNotFoundException;
 import pl.macieksob.rentCar.model.Car;
+import pl.macieksob.rentCar.model.Category;
 import pl.macieksob.rentCar.model.Petrol;
 import pl.macieksob.rentCar.model.Transmission;
 import pl.macieksob.rentCar.repository.CarRepository;
@@ -49,6 +50,7 @@ public class CarService {
         }
 
         Car car1 = mapToEntity(car);
+        car.setTaken(false);
         carRepository.save(car1);
 
         return car;
@@ -76,7 +78,7 @@ public class CarService {
 
         car.setTransmission(editCar.getTransmission());
         car.setCategory(editCar.getCategory());
-        car.setDetails(editCar.getDetails());
+
         car.setImage(editCar.getImage());
 
         carRepository.save(car);
@@ -191,27 +193,27 @@ public class CarService {
 
     //FILTERING
     public List<CarDTO> getSportCar(){
-        return carRepository.findAllByCategory("SPORT",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.SPORT,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getExclusiveCar(){
-        return carRepository.findAllByCategory("EXCLUSIVE",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.DOSTAWCZE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getComfortCar(){
-        return carRepository.findAllByCategory("COMFORT",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.KOMFORTOWE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getCargoCar(){
-        return carRepository.findAllByCategory("CARGO",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.DOSTAWCZE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getSUVCar(){
-        return carRepository.findAllByCategory("SUV",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.SUV,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getEconomyCar(){
-        return carRepository.findAllByCategory("ECONOMY",PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.EKONOMICZNE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(String brand, String model, BigDecimal prize, Integer km, Petrol petrol, Integer year, Double engine, Transmission tr){
@@ -230,5 +232,6 @@ public class CarService {
         byPassword.setPoints(byPassword.getPoints() + car.getPoints());
         carRepository.save(car);
     }
+
 
 }

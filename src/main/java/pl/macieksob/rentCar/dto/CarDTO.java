@@ -1,13 +1,8 @@
 package pl.macieksob.rentCar.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.lang.NonNull;
-import pl.macieksob.rentCar.model.Category;
-import pl.macieksob.rentCar.model.Order;
-import pl.macieksob.rentCar.model.Petrol;
-import pl.macieksob.rentCar.model.Transmission;
+import pl.macieksob.rentCar.model.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -16,7 +11,9 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-
+@AllArgsConstructor
+@Getter
+@Setter
 public class CarDTO {
 
 
@@ -28,8 +25,6 @@ public class CarDTO {
     @NotBlank(message = "Pole nie może byc puste")
     private String licensePlate;
 
-    @NotEmpty(message = "Pole nie może byc puste")
-    private BigDecimal prize;
 
     @NotNull(message = "Pole nie może byc puste")
     @Min(30)
@@ -43,6 +38,11 @@ public class CarDTO {
     @Min(5)
     @Max(50)
     private Double combustion;
+
+    @NotEmpty(message = "Pole nie może byc puste")
+    @OneToOne
+    private Prize prize;
+
 
     @NotNull(message = "Pole nie może byc puste")
     @Min(1)
@@ -78,14 +78,30 @@ public class CarDTO {
     @NotNull(message = "Pole nie może byc puste")
     private Boolean taken;
 
-    @Min(200)
-    @NotNull(message = "Pole nie może byc puste")
-    private Integer deposit;
 
-    @ManyToMany(mappedBy = "cars")
-    @NotEmpty(message = "Pole nie może byc puste")
-    private Set<Order> orders;
+//    @ManyToMany(mappedBy = "cars")
+//    @NotEmpty(message = "Pole nie może byc puste")
+//    private Set<Order> orders;
 
     @NotNull(message = "Pole nie może być puste!")
     private Integer points;
+
+    public CarDTO(Long id, String model, String licensePlate, Integer km, Integer nm, Double combustion, Prize prize, Double engine, String image, String brand, Transmission transmission, String details, Category category, Petrol petrol, Integer year, Integer points) {
+        this.id = id;
+        this.model = model;
+        this.licensePlate = licensePlate;
+        this.km = km;
+        this.nm = nm;
+        this.combustion = combustion;
+        this.prize = prize;
+        this.engine = engine;
+        this.image = image;
+        this.brand = brand;
+        this.transmission = transmission;
+        this.details = details;
+        this.category = category;
+        this.petrol = petrol;
+        this.year = year;
+        this.points = points;
+    }
 }

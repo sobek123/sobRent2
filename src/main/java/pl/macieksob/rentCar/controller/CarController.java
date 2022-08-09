@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.macieksob.rentCar.dto.CarDTO;
 import pl.macieksob.rentCar.model.Car;
+import pl.macieksob.rentCar.model.Category;
 import pl.macieksob.rentCar.model.Petrol;
 import pl.macieksob.rentCar.model.Transmission;
 import pl.macieksob.rentCar.service.CarService;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -77,7 +80,7 @@ public class CarController {
 
     @DeleteMapping("/deleteCar/{id}")
     public void deleteCarById(@PathVariable Long id){
-        carService.deleteCar(id);
+        carService.deleteCarById(id);
 
     }
 
@@ -138,6 +141,49 @@ public class CarController {
     @RequestParam(value = "km") Integer km,@RequestParam(value = "prize") BigDecimal prize){
         return carService.getAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(brand,model,prize,km,petrol,year,engine,transmission);
     }
+
+    @GetMapping("/categories")
+    public List<Category> getCategories(){
+        Category[] values = Category.values();
+
+        return Arrays.asList(values);
+    }
+
+    @GetMapping("/transmissions")
+    public List<Transmission> getTransmissions(){
+        Transmission[] values = Transmission.values();
+        return Arrays.asList(values);
+    }
+
+
+    @GetMapping("/petrols")
+    public List<Petrol> getPetrols(){
+        Petrol[] values = Petrol.values();
+        return Arrays.asList(values);
+    }
+
+
+    @CrossOrigin("http://localhost:3000")
+    @GetMapping("/models")
+    public List<String> getModels(){
+        System.out.println(carService.getAllCars().stream().map(CarDTO::getModel).collect(Collectors.toList()));
+        return carService.getAllCars().stream().map(CarDTO::getModel).collect(Collectors.toList());
+
+    }
+
+    @CrossOrigin("http://localhost:3000")
+    @GetMapping("/brands")
+    public List<String> getBrands(){
+        System.out.println(carService.getAllCars().stream().map(CarDTO::getBrand).collect(Collectors.toList()));
+        return carService.getAllCars().stream().map(CarDTO::getBrand).collect(Collectors.toList());
+    }
+
+    @GetMapping("/years")
+    public List<Integer> getYears(){
+        System.out.println(carService.getAllCars().stream().map(CarDTO::getYear).collect(Collectors.toList()));
+        return carService.getAllCars().stream().map(CarDTO::getYear).collect(Collectors.toList());
+    }
+
 
 
 }

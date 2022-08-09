@@ -1,9 +1,6 @@
 package pl.macieksob.rentCar.dto;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.NonNull;
 import pl.macieksob.rentCar.model.Role;
@@ -16,9 +13,10 @@ import java.util.Collection;
 
 
 @Data
-@Getter
 @NoArgsConstructor
-
+@AllArgsConstructor
+@Getter
+@Setter
 public class UserDTO {
     private Long id;
 

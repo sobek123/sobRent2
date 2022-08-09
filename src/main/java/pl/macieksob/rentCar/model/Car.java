@@ -33,8 +33,9 @@ public class Car {
     @NotBlank(message = "Pole nie może byc puste")
     private String licensePlate;
     
-    @NotEmpty(message = "Pole nie może byc puste")
-    private BigDecimal prize;
+    @NotNull(message = "Pole nie może byc puste")
+    @OneToOne(cascade = CascadeType.ALL)
+    private Prize prize;
     
     @NotNull(message = "Pole nie może byc puste")
     @Min(30)
@@ -64,8 +65,7 @@ public class Car {
     @NotNull(message = "Pole nie może byc puste")
     private Transmission transmission;
     
-    @NotBlank(message = "Pole nie może byc puste")
-    private String details;
+
 
     @NotNull(message = "Pole nie może byc puste")
     @Enumerated(value = EnumType.STRING)
@@ -80,18 +80,27 @@ public class Car {
     @Max(2023)
     private Integer year;
 
-    @NotNull(message = "Pole nie może byc puste")
+//    @NotNull(message = "Pole nie może byc puste")
     private Boolean taken = false;
 
     @NotNull(message = "Pole nie może być puste")
     @Min(100)
     private Integer points;
 
-    @Min(200)
-    @NotNull(message = "Pole nie może byc puste")
-    private Integer deposit;
+//    @Min(200)
+//    @NotNull(message = "Pole nie może byc puste")
+//    private Integer deposit;
 
     @ManyToMany(mappedBy = "cars")
-    @NotEmpty(message = "Pole nie może byc puste")
+//    @NotEmpty(message = "Pole nie może byc puste")
     private Set<Order> orders;
+
+
+
+    @NotBlank(message = "Pole nie może byc puste")
+    private String details;
+
+    @Min(2)
+//    @NotNull(message = "Pole nie może byc puste")
+    private Integer numberOfSeats;
 }

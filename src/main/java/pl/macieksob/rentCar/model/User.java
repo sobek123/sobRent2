@@ -76,6 +76,7 @@ public class User implements UserDetails {
     @NotBlank(message = "Pole nie może byc puste!")
     @Column(nullable = false)
     @Size(min=6,message = "Pole musi mieć co najmniej 6 znaków!")
+    @Pattern(regexp = "\"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$\"")
     private String password;
 
     @NotBlank(message = "Pole nie może byc puste!")

@@ -92,7 +92,7 @@ public class UserService {
             throw new UserDuplicateException("User already exists!");
         }
         User user1 = mapToEntity(user);
-        user1.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user1.setPassword(passwordEncoder.encode(user.getPassword()));
 
 
          userRepository.save(user1);
@@ -207,4 +207,8 @@ public class UserService {
         return mapToDTO(byPassword);
     }
 
+    public void changeUserPassword(User user, String password) {
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
 }

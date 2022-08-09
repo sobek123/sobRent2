@@ -4,13 +4,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pl.macieksob.rentCar.dto.CarDTO;
 import pl.macieksob.rentCar.model.Car;
+import pl.macieksob.rentCar.model.Category;
 import pl.macieksob.rentCar.model.Petrol;
 import pl.macieksob.rentCar.model.Transmission;
 
 import java.math.BigDecimal;
-import java.time.Year;
 import java.util.List;
 
 @Repository
@@ -23,7 +22,7 @@ public interface CarRepository extends JpaRepository< Car, Long> {
     List< Car> findAllByTransmission(Transmission transmission,Pageable pageable);
 
     List< Car> findAllByNm(Integer nm,Pageable pageable);
-    List< Car> findAllByCategory(String category,Pageable pageable);
+    List< Car> findAllByCategory(Category category, Pageable pageable);
 
     @Query(nativeQuery = true, value = "gdgf")
     List< Car> findAllByStartDateAndEndDateAndPLace(String category,Pageable pageable);

@@ -2,11 +2,7 @@ package pl.macieksob.rentCar.model;
 
 public enum Petrol {
 
-    DIESEL("Diesel"), BENZINE("Benzyna"), HYBRID("Hybryda"), ELECTRIC("ELektryczny");
+    DIESEL, BENZYNA, HYBRID, ELEKTRYCZNY;
 
-    private String detail;
 
-    Petrol(){}
-
-    Petrol(String detail){this.detail=detail;}
 }

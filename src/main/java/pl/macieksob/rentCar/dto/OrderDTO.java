@@ -1,9 +1,7 @@
 package pl.macieksob.rentCar.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.lang.NonNull;
 import pl.macieksob.rentCar.model.Car;
 import pl.macieksob.rentCar.model.User;
@@ -18,6 +16,9 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class OrderDTO {
 
     private Long id;
