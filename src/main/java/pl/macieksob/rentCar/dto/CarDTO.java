@@ -7,6 +7,7 @@ import pl.macieksob.rentCar.model.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Set;
 
 @Data
@@ -24,7 +25,9 @@ public class CarDTO {
 
     @NotBlank(message = "Pole nie może byc puste")
     private String licensePlate;
-
+    @Min(2)
+    @NotNull(message = "Pole nie może byc puste")
+    private Integer numberOfSeats;
 
     @NotNull(message = "Pole nie może byc puste")
     @Min(30)
@@ -86,7 +89,20 @@ public class CarDTO {
     @NotNull(message = "Pole nie może być puste!")
     private Integer points;
 
-    public CarDTO(Long id, String model, String licensePlate, Integer km, Integer nm, Double combustion, Prize prize, Double engine, String image, String brand, Transmission transmission, String details, Category category, Petrol petrol, Integer year, Integer points) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CarDTO carDTO = (CarDTO) o;
+        return brand.equals(carDTO.brand);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand);
+    }
+
+    public CarDTO(Long id, String model, String licensePlate, Integer km, Integer nm, Double combustion, Prize prize, Double engine, String image, String brand, Transmission transmission, String details, Category category, Petrol petrol, Integer year, Integer points, Integer numberOfSeats) {
         this.id = id;
         this.model = model;
         this.licensePlate = licensePlate;
@@ -103,5 +119,6 @@ public class CarDTO {
         this.petrol = petrol;
         this.year = year;
         this.points = points;
+        this.numberOfSeats = numberOfSeats;
     }
 }

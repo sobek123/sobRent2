@@ -96,38 +96,46 @@ public class CarService {
     }
 
     public java.util.List<CarDTO> getByModel(String model){
-        return carRepository.findAllByModel(model, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByModel(model).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
     public java.util.List<CarDTO> getAllCars(){
-        return carRepository.findAll(PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
     public java.util.List<CarDTO> getByBrand(String brand){
-        return carRepository.findAllByBrand(brand, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByBrand(brand).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public java.util.List<CarDTO> getByKm(Integer km){
-        return carRepository.findAllByKm(km, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByKm(km).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public java.util.List<CarDTO> getByTransmission(Transmission transmission){
-        return carRepository.findAllByTransmission(transmission, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByTransmission(transmission).stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+    public List<String> getModelsByBrands(String brand){
+        List<CarDTO> collect = carRepository.findAllByBrand(brand).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return collect.stream().map(CarDTO::getBrand).collect(Collectors.toList());
     }
 
+    public List<Integer> getYearByBrands(String brand){
+        List<CarDTO> collect = carRepository.findAllByBrand(brand).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return collect.stream().map(CarDTO::getYear).collect(Collectors.toList());
+    }
 
     public java.util.List<CarDTO> getByPetrol(Petrol petrol){
-        return carRepository.findAllByPetrol(petrol, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByPetrol(petrol).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public java.util.List<CarDTO> getByEngine(Double engine){
-        return carRepository.findAllByEngine(engine, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByEngine(engine).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public java.util.List<CarDTO> getByYear(Integer year){
-        return carRepository.findAllByYear(year, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByYear(year).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public java.util.List<CarDTO> getByPrize(BigDecimal prize){
-        return carRepository.findAllByPrize(prize, PageRequest.of(0,10)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByPrize(prize).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     //SORTING
@@ -193,32 +201,33 @@ public class CarService {
 
     //FILTERING
     public List<CarDTO> getSportCar(){
-        return carRepository.findAllByCategory(Category.SPORT,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.SPORT).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getExclusiveCar(){
-        return carRepository.findAllByCategory(Category.DOSTAWCZE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.DOSTAWCZE).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getComfortCar(){
-        return carRepository.findAllByCategory(Category.KOMFORTOWE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.KOMFORTOWE).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getCargoCar(){
-        return carRepository.findAllByCategory(Category.DOSTAWCZE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.DOSTAWCZE).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getSUVCar(){
-        return carRepository.findAllByCategory(Category.SUV,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        System.out.println(carRepository.findAllByCategory(Category.SUV).stream().map(this::mapToDTO).collect(Collectors.toList()));
+        return carRepository.findAllByCategory(Category.SUV).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getEconomyCar(){
-        return carRepository.findAllByCategory(Category.EKONOMICZNE,PageRequest.of(0,3)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByCategory(Category.EKONOMICZNE).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public List<CarDTO> getAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(String brand, String model, BigDecimal prize, Integer km, Petrol petrol, Integer year, Double engine, Transmission tr){
 
-        return carRepository.findAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(prize,model,brand,km,tr,year,petrol,engine,PageRequest.of(0,5)).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return carRepository.findAllByPrizeAndModelAndBrandAndKmAndTransmissionAndYearAndPetrolAndEngine(prize,model,brand,km,tr,year,petrol,engine).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     public void rentCar(Long id){

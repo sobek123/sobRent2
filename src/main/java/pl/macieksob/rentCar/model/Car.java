@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -101,6 +102,19 @@ public class Car {
     private String details;
 
     @Min(2)
-//    @NotNull(message = "Pole nie może byc puste")
+    @NotNull(message = "Pole nie może byc puste")
     private Integer numberOfSeats;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return brand.equals(car.brand);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand);
+    }
 }

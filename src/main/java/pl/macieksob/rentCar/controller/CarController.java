@@ -175,7 +175,7 @@ public class CarController {
     @GetMapping("/brands")
     public List<String> getBrands(){
         System.out.println(carService.getAllCars().stream().map(CarDTO::getBrand).collect(Collectors.toList()));
-        return carService.getAllCars().stream().map(CarDTO::getBrand).collect(Collectors.toList());
+        return carService.getAllCars().stream().distinct().map(CarDTO::getBrand).collect(Collectors.toList());
     }
 
     @GetMapping("/years")

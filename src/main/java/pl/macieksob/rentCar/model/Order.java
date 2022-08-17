@@ -47,6 +47,10 @@ public class Order {
     @Column(nullable = false)
     private Place place;
 
+    @NotNull(message = "Pole nie może byc puste")
+    @Column(nullable = false)
+    private Integer days;
+
     @ManyToMany
     @JoinTable(
             name = "ORDER_CARS",
