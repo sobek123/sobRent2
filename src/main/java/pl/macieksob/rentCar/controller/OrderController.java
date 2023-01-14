@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orders")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://sobrent.herokuapp.com")
 public class OrderController {
 
     @Autowired
