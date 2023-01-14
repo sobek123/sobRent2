@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://sobrent.herokuapp.com")
 @RequestMapping("/users")
 public class UserController {
 
@@ -58,7 +58,7 @@ public class UserController {
         String url = Utility.getURL(httpServletRequest);
         String randomCode = RandomString.make(64);
         user.setVerificationCode(randomCode);
-        userService.sendVerificationEmail(user,"http://localhost:3000");
+        userService.sendVerificationEmail(user,"https://sobrent.herokuapp.com");
 //        user.setCreatedTime(LocalDateTime.now());
 //        user.setRoles(Set.of(new Role("LOGGED_USER")));
         return userService.addUser(user);
@@ -115,7 +115,7 @@ public class UserController {
         String token = RandomString.make(45);
 
         userService.updateResetPasswordToken(token,email);
-        String resetPasswordLink = "http://localhost:3000/reset_password/token=" + token;
+        String resetPasswordLink = "https://sobrent.herokuapp.com/reset_password/token=" + token;
         try {
             mailService.sendMailResetPassword(email,resetPasswordLink);
         } catch (MessagingException | UnsupportedEncodingException e) {
