@@ -11,7 +11,7 @@ public class WebMVCConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedMethods("*")
-                .allowedOrigins("https://sobrent.herokuapp.com")
+                .allowedOrigins("https://sobrent-front.herokuapp.com")
                 .allowedHeaders("*")
                 .allowCredentials(false)
                 .maxAge(-1);
