@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
-@CrossOrigin("https://sobrent.herokuapp.com")
+@CrossOrigin("https://sobrent-front.herokuapp.com")
 public class RoleController {
 
     @Autowired
