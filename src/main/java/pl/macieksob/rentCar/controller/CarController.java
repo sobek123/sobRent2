@@ -54,14 +54,14 @@ public class CarController {
     }
 
     @RequestMapping(value = "/newCar",method=RequestMethod.POST)
-    @CrossOrigin("https://sobrent.herokuapp.com")
+    @CrossOrigin("https://sobrent-front.herokuapp.com")
     public CarDTO saveCar(@Valid @RequestBody CarDTO car){
         return carService.addCar(car);
     }
 
 
     @GetMapping("/all")
-    @CrossOrigin("https://sobrent.herokuapp.com")
+    @CrossOrigin("https://sobrent-front.herokuapp.com")
     public List<CarDTO> getAllCars(){
         return carService.getAllCars();
     }
@@ -79,14 +79,14 @@ public class CarController {
     }
 
     @RequestMapping(value = "/deleteCar/{id}",method=RequestMethod.DELETE)
-    @CrossOrigin("https://sobrent.herokuapp.com")
+    @CrossOrigin("https://sobrent-front.herokuapp.com")
     public void deleteCarById(@PathVariable("id") Long id){
         carService.deleteCarById(id);
 
     }
 
     @RequestMapping(value = "/deleteCar",method=RequestMethod.DELETE)
-    @CrossOrigin("https://sobrent.herokuapp.com")
+    @CrossOrigin("https://sobrent-front.herokuapp.com")
     public void deleteCar(CarDTO user){
         carService.deleteCar(user);
 
@@ -170,14 +170,14 @@ public class CarController {
 //    }
 
 
-    @CrossOrigin("https://sobrent.herokuapp.com")
+    @CrossOrigin("https://sobrent-front.herokuapp.com")
     @GetMapping("/models")
     public List<String> getModels(){
         return carService.getAllCars().stream().map(CarDTO::getModel).collect(Collectors.toList());
 
     }
 
-    @CrossOrigin("https://sobrent.herokuapp.com")
+    @CrossOrigin("https://sobrent-front.herokuapp.com")
     @GetMapping("/brands")
     public List<String> getBrands(){
         return carService.getAllCars().stream().distinct().map(CarDTO::getBrand).collect(Collectors.toList());
