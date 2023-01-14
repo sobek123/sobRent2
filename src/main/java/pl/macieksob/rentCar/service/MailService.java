@@ -31,14 +31,18 @@ public class MailService {
     public void sendMailResetPassword(String email, String resetPasswordLink) throws MessagingException, UnsupportedEncodingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true);
-        message.setFrom("macieksob25@gmail.com","RentCar");
+        message.setFrom("macieksob25@gmail.com","SobRent");
         message.setTo(email);
         String content = "<p>Szanowany Panie/Szanowna Pani, </p>";
         content += "Zarejestrowaliśmy prośbę zmiany hasła.";
+        content += "<br>";
         content += "Aby zmienić hasło kliknij w poniższy link.";
+        content += "<br>";
         content += "<a href=\"" + resetPasswordLink + "\">Zmiana hasła</a>";
+        content += "<br>";
         content += "Zignoruj ten e-mail, gdy pamiętasz swoje hasło lub nie wysyłałeś prośby o zmianę hasła.";
-        content += "<p>Pozdrawiamy, <br> zespół RentCar!</p>";
+        content += "<br>";
+        content += "<p>Pozdrawiamy, <br> zespół SobRent!</p>";
         message.setSubject("Resetowanie hasła");
         message.setText(content,true);
         javaMailSender.send(mimeMessage);

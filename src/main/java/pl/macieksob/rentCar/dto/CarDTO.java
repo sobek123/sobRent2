@@ -7,14 +7,16 @@ import pl.macieksob.rentCar.model.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class CarDTO {
 
 
@@ -42,9 +44,10 @@ public class CarDTO {
     @Max(50)
     private Double combustion;
 
-    @NotEmpty(message = "Pole nie może byc puste")
-    @OneToOne
-    private Prize prize;
+//    @NotEmpty(message = "Pole nie może byc puste")
+//    @OneToOne
+
+    private Price price;
 
 
     @NotNull(message = "Pole nie może byc puste")
@@ -81,7 +84,9 @@ public class CarDTO {
     @NotNull(message = "Pole nie może byc puste")
     private Boolean taken;
 
+    private List<OrderDTO> orders;
 
+    private String fault;
 //    @ManyToMany(mappedBy = "cars")
 //    @NotEmpty(message = "Pole nie może byc puste")
 //    private Set<Order> orders;
@@ -96,20 +101,21 @@ public class CarDTO {
         CarDTO carDTO = (CarDTO) o;
         return brand.equals(carDTO.brand);
     }
-
+    @Min(0)
+    private Integer rentings;
     @Override
     public int hashCode() {
         return Objects.hash(brand);
     }
 
-    public CarDTO(Long id, String model, String licensePlate, Integer km, Integer nm, Double combustion, Prize prize, Double engine, String image, String brand, Transmission transmission, String details, Category category, Petrol petrol, Integer year, Integer points, Integer numberOfSeats) {
+    public CarDTO(Long id, String model, String licensePlate, Integer km, Integer nm, Double combustion, Price prize, Double engine, String image, String brand, Transmission transmission, String details, Category category, Petrol petrol, Integer year, Integer points, Integer numberOfSeats) {
         this.id = id;
         this.model = model;
         this.licensePlate = licensePlate;
         this.km = km;
         this.nm = nm;
         this.combustion = combustion;
-        this.prize = prize;
+        this.price = prize;
         this.engine = engine;
         this.image = image;
         this.brand = brand;

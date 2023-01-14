@@ -5,12 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -19,29 +15,29 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Prize {
+public class Price {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Pole nie może byc puste")
-    private BigDecimal first;
+    private BigDecimal firstPeriod;
 
     @NotNull(message = "Pole nie może byc puste")
-    private BigDecimal second;
+    private BigDecimal secondPeriod;
 
     @NotNull(message = "Pole nie może byc puste")
-    private BigDecimal third;
+    private BigDecimal thirdPeriod;
 
     @NotNull(message = "Pole nie może byc puste")
-    private BigDecimal forth;
+    private BigDecimal fourthPeriod;
 
     @NotNull(message = "Pole nie może byc puste")
-    private BigDecimal fifth;
+    private BigDecimal fifthPeriod;
 
     @NotNull(message = "Pole nie może byc puste")
-    private BigDecimal six;
+    private BigDecimal sixthPeriod;
 
     @NotNull(message = "Pole nie może byc puste")
     @Min(200)

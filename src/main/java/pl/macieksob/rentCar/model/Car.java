@@ -1,5 +1,6 @@
 package pl.macieksob.rentCar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.Length;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,8 +22,9 @@ import java.util.Set;
 @Table(name = "CARS")
 @Getter
 @Setter
-@ToString
+//@ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class Car {
 
     @Id
@@ -34,9 +37,9 @@ public class Car {
     @NotBlank(message = "Pole nie może byc puste")
     private String licensePlate;
     
-    @NotNull(message = "Pole nie może byc puste")
+//    @NotNull(message = "Pole nie może byc puste")
     @OneToOne(cascade = CascadeType.ALL)
-    private Prize prize;
+    private Price price;
     
     @NotNull(message = "Pole nie może byc puste")
     @Min(30)
@@ -47,7 +50,7 @@ public class Car {
     private Integer nm;
 
     @NotNull(message = "Pole nie może byc puste")
-    @Min(5)
+    @Min(3)
     @Max(50)
     private Double combustion;
 
@@ -66,7 +69,7 @@ public class Car {
     @NotNull(message = "Pole nie może byc puste")
     private Transmission transmission;
     
-
+    private String fault = "";
 
     @NotNull(message = "Pole nie może byc puste")
     @Enumerated(value = EnumType.STRING)
@@ -91,12 +94,14 @@ public class Car {
 //    @Min(200)
 //    @NotNull(message = "Pole nie może byc puste")
 //    private Integer deposit;
+//
+//    @ManyToMany(mappedBy = "cars")
+////    @NotEmpty(message = "Pole nie może byc puste")
+//    private Set<Order> orders;
 
-    @ManyToMany(mappedBy = "cars")
-//    @NotEmpty(message = "Pole nie może byc puste")
-    private Set<Order> orders;
-
-
+//    @OneToOne(mappedBy = "car",fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private Order order;
 
     @NotBlank(message = "Pole nie może byc puste")
     private String details;
@@ -104,6 +109,32 @@ public class Car {
     @Min(2)
     @NotNull(message = "Pole nie może byc puste")
     private Integer numberOfSeats;
+
+    @Min(0)
+    private Integer rentings;
+
+
+
+    public Car(Long id, String model, String licensePlate, Price price, Integer km, Integer nm, Double combustion, Double engine, String image, String brand, Transmission transmission, Category category, Petrol petrol, Integer year, Integer points, String details, Integer numberOfSeats) {
+        this.id = id;
+        this.model = model;
+        this.licensePlate = licensePlate;
+        this.price = price;
+        this.km = km;
+        this.nm = nm;
+        this.combustion = combustion;
+        this.engine = engine;
+        this.image = image;
+        this.brand = brand;
+        this.transmission = transmission;
+        this.category = category;
+        this.petrol = petrol;
+        this.year = year;
+        this.points = points;
+        this.details = details;
+        this.numberOfSeats = numberOfSeats;
+    }
+    //    private Boolean opened;
 
     @Override
     public boolean equals(Object o) {
