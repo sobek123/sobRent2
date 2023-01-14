@@ -93,7 +93,7 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://sobrent.herokuapp.com"));
+        configuration.setAllowedOrigins(Arrays.asList("https://sobrent-front.herokuapp.com"));
         configuration.setAllowedMethods(Arrays.asList("HEAD",
                 "GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowCredentials(true); //error
