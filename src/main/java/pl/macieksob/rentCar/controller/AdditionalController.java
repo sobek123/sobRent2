@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/additional")
-@CrossOrigin("https://sobrent.herokuapp.com")
+@CrossOrigin("https://sobrent-front.herokuapp.com")
 public class AdditionalController {
 
     @Autowired
