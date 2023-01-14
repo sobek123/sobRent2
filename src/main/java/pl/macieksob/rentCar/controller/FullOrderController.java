@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/fullOrder")
-@CrossOrigin("https://sobrent.herokuapp.com")
+@CrossOrigin("https://sobrent-front.herokuapp.com")
 public class FullOrderController {
 
     @Autowired
