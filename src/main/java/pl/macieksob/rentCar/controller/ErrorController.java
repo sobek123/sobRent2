@@ -8,7 +8,7 @@ import pl.macieksob.rentCar.service.MailService;
 import pl.macieksob.rentCar.service.CarService;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://sobrent.herokuapp.com")
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 
     @GetMapping("/error")
