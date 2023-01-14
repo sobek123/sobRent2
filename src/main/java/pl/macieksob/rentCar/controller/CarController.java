@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://sobrent.herokuapp.com")
 @RequestMapping("/cars")
 public class CarController {
 
@@ -54,14 +54,14 @@ public class CarController {
     }
 
     @RequestMapping(value = "/newCar",method=RequestMethod.POST)
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sobrent.herokuapp.com")
     public CarDTO saveCar(@Valid @RequestBody CarDTO car){
         return carService.addCar(car);
     }
 
 
     @GetMapping("/all")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sobrent.herokuapp.com")
     public List<CarDTO> getAllCars(){
         return carService.getAllCars();
     }
@@ -79,14 +79,14 @@ public class CarController {
     }
 
     @RequestMapping(value = "/deleteCar/{id}",method=RequestMethod.DELETE)
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sobrent.herokuapp.com")
     public void deleteCarById(@PathVariable("id") Long id){
         carService.deleteCarById(id);
 
     }
 
     @RequestMapping(value = "/deleteCar",method=RequestMethod.DELETE)
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sobrent.herokuapp.com")
     public void deleteCar(CarDTO user){
         carService.deleteCar(user);
 
@@ -170,14 +170,14 @@ public class CarController {
 //    }
 
 
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sobrent.herokuapp.com")
     @GetMapping("/models")
     public List<String> getModels(){
         return carService.getAllCars().stream().map(CarDTO::getModel).collect(Collectors.toList());
 
     }
 
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sobrent.herokuapp.com")
     @GetMapping("/brands")
     public List<String> getBrands(){
         return carService.getAllCars().stream().distinct().map(CarDTO::getBrand).collect(Collectors.toList());
