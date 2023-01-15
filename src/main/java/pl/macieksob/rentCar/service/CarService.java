@@ -282,20 +282,25 @@ public class CarService {
         List<CarDTO> mostRentedCar = carRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
 
         List<CarDTO> cars = new ArrayList<>();
+        List<CarDTO> filterCars = new ArrayList<>();
+
 
         List<OrderDTO> allOrders = orderService.getAllOrders();
 
         for(OrderDTO order: allOrders){
             if((order.getStartDate().compareTo(LocalDate.parse(startDate)) > 0 && order.getStartDate().compareTo(LocalDate.parse(endDate)) > 0) || (order.getEndDate().compareTo(LocalDate.parse(endDate)) < 0 && order.getEndDate().compareTo(LocalDate.parse(startDate)) < 0)){
                 cars.add(order.getCar());
+            }else{
+                filterCars.add(order.getCar());
             }
         }
 
-//        for(int i = 0;i< mostRentedCar.size(); i++){
-//            if(!cars.contains(mostRentedCar.get(i))){
-//                cars.add(mostRentedCar.get(i));
-//            }
-//        }
+        for(int i = 0;i< mostRentedCar.size(); i++){
+            if(!cars.contains(mostRentedCar.get(i)) && !filterCars.contains(mostRentedCar.get(i))){
+                cars.add(mostRentedCar.get(i));
+            }
+        }
+        
 
 //        for(Car c: mostRentedCar){
 //            Order order = c.getOrder();
