@@ -147,7 +147,9 @@ public class RentCarApplication {
 //					LocalDateTime.now(), LocalDate.of(200, 12, 12), "fgdgdfg", "dfgdfgdf", true, Set.of(new Role("ROLE_WORKER"))),Place.FIRST, Place.SECOND,30,Set.of(new CarDTO(42L, "Corolla", "BI6734T", 280, 345, 7.7, new Price(42L,BigDecimal.valueOf(89), BigDecimal.valueOf(129), BigDecimal.valueOf(199), BigDecimal.valueOf(219), BigDecimal.valueOf(259), BigDecimal.valueOf(269), BigDecimal.valueOf(300))
 //					, 2.2, "hfghfg", "Toyota", Transmission.AUTOMATYCZNA, "poduszki", Category.KOMFORTOWE, Petrol.DIESEL, 2020, 250, 4)))),new UserDTO(2L, "Diana", "Kolska", "dianakol@gmail.com", "15-546", "Bialystok", "647 676 888", "Waryńskiego", "4", 22, "Dianakol1234!", "00989889984",
 //					LocalDateTime.now(), LocalDate.of(1998, 3, 11), "fgdgdfg", "dfgdfgdf", true, Set.of(new Role("ROLE_WORKER")))));
-
+contactService.addContact(new ContactDTO("Mac","Sob","macieksob@gmail.com","654666444","Witam"));
+			contactService.addContact(new ContactDTO("Edward","Wolski","ed.wolski@gmail.com","533221112","Poproszę o"));
+			contactService.addContact(new ContactDTO("Kamila","Bielska","kambil12@gmail.com","523124445","Dzień dobry"));
 //			OrderDTO e1 = new OrderDTO(1L, LocalDate.of(2023, 1, 5), LocalDate.of(2023, 1, 8), Place.FIRST, Place.SECOND, 54432, carDTO4);
 //			OrderDTO e2 = new OrderDTO(2L, LocalDate.of(2023, 1, 10), LocalDate.of(2023, 1, 12), Place.FIRST, Place.SECOND, 44323, carDTO3);
 //			OrderDTO e3 = new OrderDTO(3L, LocalDate.of(2023, 1, 2), LocalDate.of(2023, 1, 4), Place.FIRST, Place.SECOND, 78767, carDTO2);
@@ -158,28 +160,28 @@ public class RentCarApplication {
 //			OrderDTO e8 = new OrderDTO(8L, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8), Place.FIRST, Place.SECOND, 43454, carDTO19);
 //			OrderDTO e9 = new OrderDTO(9L, LocalDate.of(2023, 5, 5), LocalDate.of(2023, 5, 8), Place.FIRST, Place.SECOND, 12434, carDTO21);
 //			OrderDTO e10 = new OrderDTO(10L, LocalDate.of(2023, 1, 5), LocalDate.of(2023, 1, 8), Place.FIRST, Place.SECOND, 45666, carDTO7);
-// 			fullOrderService.addFullOrder(new FullOrderDTO(1L,Set.of(new OrderDTO(1L, LocalDate.of(2023, 1, 5), LocalDate.of(2023, 1, 8), Place.FIRST, Place.SECOND, 54432, carDTO4)),userDTO,new BigDecimal(45677)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(2L,Set.of(new OrderDTO(2L, LocalDate.of(2023, 1, 10), LocalDate.of(2023, 1, 12), Place.FIRST, Place.SECOND, 44323, carDTO3)),userDTO,new BigDecimal(44323)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(3L,Set.of(new OrderDTO(3L, LocalDate.of(2023, 1, 2), LocalDate.of(2023, 1, 4), Place.FIRST, Place.SECOND, 78767, carDTO2)),userDTO,new BigDecimal(78767)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(4L,Set.of(new OrderDTO(4L, LocalDate.of(2023, 2, 5), LocalDate.of(2023, 2, 8), Place.FIRST, Place.SECOND, 23456, carDTO25)),userDTO,new BigDecimal(23456)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(5L,Set.of(new OrderDTO(5L, LocalDate.of(2023, 6, 1), LocalDate.of(2023, 6, 8), Place.FIRST, Place.SECOND, 45677, carDTO21)),userDTO,new BigDecimal(45677)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(6L,Set.of(new OrderDTO(6L, LocalDate.of(2023, 4, 4), LocalDate.of(2023, 4, 18), Place.FIRST, Place.SECOND, 55455, carDTO14)),userDTO,new BigDecimal(55455)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(7L,Set.of(new OrderDTO(7L, LocalDate.of(2023, 1, 16), LocalDate.of(2023, 1, 18), Place.FIRST, Place.SECOND, 43245, carDTO13)),userDTO,new BigDecimal(43245)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(8L,Set.of(new OrderDTO(8L, LocalDate.of(2023, 1, 5), LocalDate.of(2023, 1, 18), Place.FIRST, Place.SECOND, 4367, carDTO16)),userDTO,new BigDecimal(4367)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(9L,Set.of(new OrderDTO(9L, LocalDate.of(2023, 6, 8), LocalDate.of(2023, 6, 28), Place.FIRST, Place.SECOND, 8686, carDTO12)),userDTO,new BigDecimal(8686)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(10L,Set.of(new OrderDTO(10L, LocalDate.of(2023, 8, 9), LocalDate.of(2023, 8, 11), Place.FIRST, Place.SECOND, 67866, carDTO11)),userDTO,new BigDecimal(67866)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(11L,Set.of(new OrderDTO(11L, LocalDate.of(2023, 9, 10), LocalDate.of(2023, 9, 16), Place.FIRST, Place.SECOND, 34565, carDTO22)),userDTO,new BigDecimal(34565)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(12L,Set.of(new OrderDTO(12L, LocalDate.of(2023, 2, 11), LocalDate.of(2023, 2, 19), Place.FIRST, Place.SECOND, 3432, carDTO27)),userDTO,new BigDecimal(3432)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(13L,Set.of(new OrderDTO(13L, LocalDate.of(2023, 4, 14), LocalDate.of(2023, 4, 21), Place.FIRST, Place.SECOND, 22344, carDTO28)),userDTO,new BigDecimal(22344)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(14L,Set.of(new OrderDTO(14L, LocalDate.of(2023, 5, 26), LocalDate.of(2023, 5, 29), Place.FIRST, Place.SECOND, 5467, carDTO1)),userDTO,new BigDecimal(5467)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(15L,Set.of(new OrderDTO(15L, LocalDate.of(2023, 7, 28), LocalDate.of(2023, 7, 30), Place.FIRST, Place.SECOND, 89890, carDTO30)),userDTO,new BigDecimal(89890)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(16L,Set.of(new OrderDTO(16L, LocalDate.of(2023, 9, 18), LocalDate.of(2023, 9, 22), Place.FIRST, Place.SECOND, 42454, carDTO31)),userDTO,new BigDecimal(42454)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(17L,Set.of(new OrderDTO(17L, LocalDate.of(2023, 10, 19), LocalDate.of(2023, 10, 21), Place.FIRST, Place.SECOND, 13423, carDTO33)),userDTO,new BigDecimal(13423)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(18L,Set.of(new OrderDTO(18L, LocalDate.of(2023, 1, 17), LocalDate.of(2023, 1, 19), Place.FIRST, Place.SECOND, 43545, carDTO34)),userDTO,new BigDecimal(43545)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(19L,Set.of(new OrderDTO(19L, LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 5), Place.FIRST, Place.SECOND, 23423, carDTO35)),userDTO,new BigDecimal(23423)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(20L,Set.of(new OrderDTO(20L, LocalDate.of(2023, 1, 3), LocalDate.of(2023, 1, 6), Place.FIRST, Place.SECOND, 12344, carDTO36)),userDTO,new BigDecimal(12344)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(21L,Set.of(new OrderDTO(21L, LocalDate.of(2023, 1, 4), LocalDate.of(2023, 1, 7), Place.FIRST, Place.SECOND, 66899, carDTO37)),userDTO,new BigDecimal(66899)));
-// 			fullOrderService.addFullOrder(new FullOrderDTO(22L,Set.of(new OrderDTO(22L, LocalDate.of(2023, 2, 5), LocalDate.of(2023, 2, 8), Place.FIRST, Place.SECOND, 34666, carDTO38)),userDTO,new BigDecimal(34666)));
+			fullOrderService.addFullOrder(new FullOrderDTO(1L,Set.of(new OrderDTO(1L, LocalDate.of(2023, 1, 5), LocalDate.of(2023, 1, 8), Place.FIRST, Place.SECOND, 54432, carDTO4)),userDTO,new BigDecimal(45677)));
+			fullOrderService.addFullOrder(new FullOrderDTO(2L,Set.of(new OrderDTO(2L, LocalDate.of(2023, 1, 10), LocalDate.of(2023, 1, 12), Place.FIRST, Place.SECOND, 44323, carDTO3)),userDTO,new BigDecimal(44323)));
+			fullOrderService.addFullOrder(new FullOrderDTO(3L,Set.of(new OrderDTO(3L, LocalDate.of(2023, 1, 2), LocalDate.of(2023, 1, 4), Place.FIRST, Place.SECOND, 78767, carDTO2)),userDTO,new BigDecimal(78767)));
+			fullOrderService.addFullOrder(new FullOrderDTO(4L,Set.of(new OrderDTO(4L, LocalDate.of(2023, 2, 5), LocalDate.of(2023, 2, 8), Place.FIRST, Place.SECOND, 23456, carDTO25)),userDTO,new BigDecimal(23456)));
+			fullOrderService.addFullOrder(new FullOrderDTO(5L,Set.of(new OrderDTO(5L, LocalDate.of(2023, 6, 1), LocalDate.of(2023, 6, 8), Place.FIRST, Place.SECOND, 45677, carDTO21)),userDTO,new BigDecimal(45677)));
+			fullOrderService.addFullOrder(new FullOrderDTO(6L,Set.of(new OrderDTO(6L, LocalDate.of(2023, 4, 4), LocalDate.of(2023, 4, 18), Place.FIRST, Place.SECOND, 55455, carDTO14)),userDTO,new BigDecimal(55455)));
+			fullOrderService.addFullOrder(new FullOrderDTO(7L,Set.of(new OrderDTO(7L, LocalDate.of(2023, 1, 16), LocalDate.of(2023, 1, 18), Place.FIRST, Place.SECOND, 43245, carDTO13)),userDTO,new BigDecimal(43245)));
+			fullOrderService.addFullOrder(new FullOrderDTO(8L,Set.of(new OrderDTO(8L, LocalDate.of(2023, 1, 5), LocalDate.of(2023, 1, 18), Place.FIRST, Place.SECOND, 4367, carDTO16)),userDTO,new BigDecimal(4367)));
+			fullOrderService.addFullOrder(new FullOrderDTO(9L,Set.of(new OrderDTO(9L, LocalDate.of(2023, 6, 8), LocalDate.of(2023, 6, 28), Place.FIRST, Place.SECOND, 8686, carDTO12)),userDTO,new BigDecimal(8686)));
+			fullOrderService.addFullOrder(new FullOrderDTO(10L,Set.of(new OrderDTO(10L, LocalDate.of(2023, 8, 9), LocalDate.of(2023, 8, 11), Place.FIRST, Place.SECOND, 67866, carDTO11)),userDTO,new BigDecimal(67866)));
+			fullOrderService.addFullOrder(new FullOrderDTO(11L,Set.of(new OrderDTO(11L, LocalDate.of(2023, 9, 10), LocalDate.of(2023, 9, 16), Place.FIRST, Place.SECOND, 34565, carDTO22)),userDTO,new BigDecimal(34565)));
+			fullOrderService.addFullOrder(new FullOrderDTO(12L,Set.of(new OrderDTO(12L, LocalDate.of(2023, 2, 11), LocalDate.of(2023, 2, 19), Place.FIRST, Place.SECOND, 3432, carDTO27)),userDTO,new BigDecimal(3432)));
+			fullOrderService.addFullOrder(new FullOrderDTO(13L,Set.of(new OrderDTO(13L, LocalDate.of(2023, 4, 14), LocalDate.of(2023, 4, 21), Place.FIRST, Place.SECOND, 22344, carDTO28)),userDTO,new BigDecimal(22344)));
+			fullOrderService.addFullOrder(new FullOrderDTO(14L,Set.of(new OrderDTO(14L, LocalDate.of(2023, 5, 26), LocalDate.of(2023, 5, 29), Place.FIRST, Place.SECOND, 5467, carDTO1)),userDTO,new BigDecimal(5467)));
+			fullOrderService.addFullOrder(new FullOrderDTO(15L,Set.of(new OrderDTO(15L, LocalDate.of(2023, 7, 28), LocalDate.of(2023, 7, 30), Place.FIRST, Place.SECOND, 89890, carDTO30)),userDTO,new BigDecimal(89890)));
+			fullOrderService.addFullOrder(new FullOrderDTO(16L,Set.of(new OrderDTO(16L, LocalDate.of(2023, 9, 18), LocalDate.of(2023, 9, 22), Place.FIRST, Place.SECOND, 42454, carDTO31)),userDTO,new BigDecimal(42454)));
+			fullOrderService.addFullOrder(new FullOrderDTO(17L,Set.of(new OrderDTO(17L, LocalDate.of(2023, 10, 19), LocalDate.of(2023, 10, 21), Place.FIRST, Place.SECOND, 13423, carDTO33)),userDTO,new BigDecimal(13423)));
+			fullOrderService.addFullOrder(new FullOrderDTO(18L,Set.of(new OrderDTO(18L, LocalDate.of(2023, 1, 17), LocalDate.of(2023, 1, 19), Place.FIRST, Place.SECOND, 43545, carDTO34)),userDTO,new BigDecimal(43545)));
+			fullOrderService.addFullOrder(new FullOrderDTO(19L,Set.of(new OrderDTO(19L, LocalDate.of(2023, 1, 1), LocalDate.of(2023, 1, 5), Place.FIRST, Place.SECOND, 23423, carDTO35)),userDTO,new BigDecimal(23423)));
+			fullOrderService.addFullOrder(new FullOrderDTO(20L,Set.of(new OrderDTO(20L, LocalDate.of(2023, 1, 3), LocalDate.of(2023, 1, 6), Place.FIRST, Place.SECOND, 12344, carDTO36)),userDTO,new BigDecimal(12344)));
+			fullOrderService.addFullOrder(new FullOrderDTO(21L,Set.of(new OrderDTO(21L, LocalDate.of(2023, 1, 4), LocalDate.of(2023, 1, 7), Place.FIRST, Place.SECOND, 66899, carDTO37)),userDTO,new BigDecimal(66899)));
+			fullOrderService.addFullOrder(new FullOrderDTO(22L,Set.of(new OrderDTO(22L, LocalDate.of(2023, 2, 5), LocalDate.of(2023, 2, 8), Place.FIRST, Place.SECOND, 34666, carDTO38)),userDTO,new BigDecimal(34666)));
 // 			fullOrderService.addFullOrder(new FullOrderDTO(23L,Set.of(new OrderDTO(23L, LocalDate.of(2023, 2, 22), LocalDate.of(2023, 2, 24), Place.FIRST, Place.SECOND, 25677, carDTO23)),userDTO,new BigDecimal(25677)));
 // 			fullOrderService.addFullOrder(new FullOrderDTO(24L,Set.of(new OrderDTO(24L, LocalDate.of(2023, 3, 21), LocalDate.of(2023, 3, 25), Place.FIRST, Place.SECOND, 76881, carDTO29)),userDTO,new BigDecimal(76881)));
 // 			fullOrderService.addFullOrder(new FullOrderDTO(25L,Set.of(new OrderDTO(25L, LocalDate.of(2023, 3, 11), LocalDate.of(2023, 3, 18), Place.FIRST, Place.SECOND, 39886, carDTO26)),userDTO,new BigDecimal(39886)));
@@ -201,9 +203,7 @@ public class RentCarApplication {
 //			fullOrderService.addFullOrder(new FullOrderDTO(2L,Set.of(new OrderDTO(2L, LocalDate.of(2022,12,21), LocalDate.of(2022,12,31),Place.FIRST, Place.SECOND,34554,carService.addCar(new CarDTO(38L, "Transit", "BI6734T", 160, 215, 9.0, new Price(38L,BigDecimal.valueOf(89), BigDecimal.valueOf(129), BigDecimal.valueOf(199), BigDecimal.valueOf(219), BigDecimal.valueOf(259), BigDecimal.valueOf(269), BigDecimal.valueOf(300)),
 //					2.6, "./cars/2020_ford_transit-passenger-van_passenger-van_350-hd-xlt-high-roof_fq_oem_1_1280.jpg", "Ford", Transmission.AUTOMATYCZNA, "poduszki", Category.DOSTAWCZE, Petrol.DIESEL, 2020, 200, 4)))),new UserDTO(2L, "Diana", "Kolska", "dianakol@gmail.com", "15-546", "Bialystok", "647 676 888", "Waryńskiego", "4", 22, "Dianakol1234!", "00989889984",
 //					LocalDateTime.now(), LocalDate.of(1998, 3, 11), "fgdgdfg", "dfgdfgdf", true, new Card(),Set.of(new Role("ROLE_ADMIN"))),new BigDecimal(34554)));
-			contactService.addContact(new ContactDTO("Mac","Sob","macieksob@gmail.com","654666444","Witam"));
-			contactService.addContact(new ContactDTO("Edward","Wolski","ed.wolski@gmail.com","533221112","Poproszę o"));
-			contactService.addContact(new ContactDTO("Kamila","Bielska","kambil12@gmail.com","523124445","Dzień dobry"));
+			
 		};
 	}
 
